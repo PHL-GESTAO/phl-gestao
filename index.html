@@ -100,62 +100,38 @@ tr:hover .row-actions,tr:focus-within .row-actions{opacity:1}
 
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 
-#phl-login-screen{
-  position:fixed;inset:0;z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-  background:linear-gradient(135deg,#0f6fff 0%,#0a4fb8 52%,#091c2f 100%);
-}
-.phl-login-card{
-  width:100%;max-width:420px;background:#fff;border-radius:24px;
-  padding:34px;box-shadow:0 30px 80px rgba(2,6,23,.30);
-}
-.phl-login-brand{text-align:center;margin-bottom:26px}
-.phl-login-logo{font-size:30px;font-weight:900;letter-spacing:.16em;color:#0f6fff}
-.phl-login-sub{font-size:12px;color:#64748b;text-transform:uppercase;font-weight:800;letter-spacing:.08em;margin-top:5px}
-.phl-login-badge{display:inline-block;margin-top:12px;padding:5px 11px;border-radius:999px;background:#dfeeff;color:#0f6fff;font-size:10px;font-weight:800;text-transform:uppercase}
-.phl-login-form{display:flex;flex-direction:column;gap:14px}
-.phl-login-group label{display:block;font-size:11px;color:#64748b;text-transform:uppercase;font-weight:800;margin-bottom:6px}
-.phl-login-input{width:100%;padding:12px 14px;border:1px solid #dbe3ee;border-radius:12px;font-size:14px;outline:none;background:#f9fbff;color:#0f172a}
-.phl-login-input:focus{border-color:#0f6fff;box-shadow:0 0 0 4px rgba(15,111,255,.10);background:#fff}
-.phl-login-btn{width:100%;padding:12px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#0f6fff,#0a4fb8);color:#fff;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 24px rgba(15,111,255,.26)}
-.phl-login-btn:hover{transform:translateY(-1px)}
-.phl-login-error{display:none;padding:10px;border-radius:9px;background:#fee2e2;color:#991b1b;border:1px solid #fecaca;text-align:center;font-size:12px}
-.phl-login-error.show{display:block}
-.phl-login-footer{text-align:center;margin-top:18px;font-size:11px;color:#94a3b8}
+
+
+#auth-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#0f6fff 0%,#0a4fb8 52%,#091c2f 100%)}
+.auth-card{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:36px;box-shadow:0 30px 80px rgba(2,6,23,.30)}
+.auth-brand{text-align:center;margin-bottom:26px}.auth-logo{font-size:30px;font-weight:900;letter-spacing:.16em;color:#0f6fff}.auth-sub{font-size:12px;color:#64748b;text-transform:uppercase;font-weight:800;letter-spacing:.08em;margin-top:5px}.auth-badge{display:inline-block;margin-top:12px;padding:5px 11px;border-radius:999px;background:#dfeeff;color:#0f6fff;font-size:10px;font-weight:800;text-transform:uppercase}
+.auth-form{display:flex;flex-direction:column;gap:14px}.auth-group label{display:block;font-size:11px;color:#64748b;text-transform:uppercase;font-weight:800;margin-bottom:6px}.auth-input{width:100%;padding:12px 14px;border:1px solid #dbe3ee;border-radius:12px;font-size:14px;outline:none;background:#f9fbff;color:#0f172a}.auth-input:focus{border-color:#0f6fff;box-shadow:0 0 0 4px rgba(15,111,255,.10);background:#fff}.auth-btn{width:100%;padding:12px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#0f6fff,#0a4fb8);color:#fff;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 24px rgba(15,111,255,.26)}.auth-btn:disabled{opacity:.65;cursor:not-allowed}.auth-link{border:0;background:none;color:#0f6fff;font-size:12px;font-weight:700;cursor:pointer;padding:4px 0;text-align:right}.auth-error{display:none;padding:10px;border-radius:9px;background:#fee2e2;color:#991b1b;border:1px solid #fecaca;text-align:center;font-size:12px}.auth-error.show{display:block}.auth-success{display:none;padding:10px;border-radius:9px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;text-align:center;font-size:12px}.auth-success.show{display:block}.auth-footer{text-align:center;margin-top:18px;font-size:11px;color:#94a3b8}.auth-config{margin-top:12px;font-size:10px;color:#b45309;text-align:center}
 
 </style>
-<base target="_blank">
+<base target="_self">
 </head>
 <body>
 
-<div id="phl-login-screen">
-  <div class="phl-login-card">
-    <div class="phl-login-brand">
-      <div class="phl-login-logo">PHL</div>
-      <div class="phl-login-sub">Manutenção e Automação</div>
-      <div class="phl-login-badge">Sistema de Gestão</div>
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="auth-logo">PHL</div>
+      <div class="auth-sub">Manutenção e Automação</div>
+      <div class="auth-badge">Sistema de Gestão</div>
     </div>
-
-    <form class="phl-login-form" onsubmit="phlHandleLogin(event)">
-      <div class="phl-login-group">
-        <label for="phl-login-user">Usuário</label>
-        <input id="phl-login-user" class="phl-login-input" type="text" autocomplete="username" required placeholder="Digite seu usuário">
-      </div>
-
-      <div class="phl-login-group">
-        <label for="phl-login-pass">Senha</label>
-        <input id="phl-login-pass" class="phl-login-input" type="password" autocomplete="current-password" required placeholder="Digite sua senha">
-      </div>
-
-      <div id="phl-login-error" class="phl-login-error"></div>
-
-      <button class="phl-login-btn" type="submit">Entrar no sistema</button>
+    <form id="auth-form" class="auth-form" action="javascript:void(0)" method="post" target="_self">
+      <div class="auth-group"><label for="auth-email">E-mail</label><input id="auth-email" class="auth-input" type="email" autocomplete="username" required placeholder="seuemail@empresa.com"></div>
+      <div class="auth-group"><label for="auth-password">Senha</label><input id="auth-password" class="auth-input" type="password" autocomplete="current-password" required minlength="8" placeholder="Mínimo de 8 caracteres"></div>
+      <div id="auth-error" class="auth-error"></div>
+      <div id="auth-success" class="auth-success"></div>
+      <button id="auth-submit" class="auth-btn" type="submit">Entrar no sistema</button>
+      <button id="forgot-password" class="auth-link" type="button">Esqueci minha senha</button>
     </form>
-
-    <div class="phl-login-footer">Acesso administrativo protegido</div>
+    <div class="auth-footer">Autenticação protegida por Supabase Auth</div>
+    <div id="auth-config-warning" class="auth-config" style="display:none">Configure as credenciais do Supabase no arquivo supabase-config.js.</div>
   </div>
 </div>
+
 
 <div class="app" id="app-container" style="display:none">
 <aside class="sidebar">
@@ -170,10 +146,6 @@ tr:hover .row-actions,tr:focus-within .row-actions{opacity:1}
 <div class="nav-item" data-page="documents" onclick="nav('documents')"><svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M14.6 3.1c1 0 2 .4 2.7 1.1l2.4 2.3c.8.7 1.2 1.8 1.2 2.8v7.7c0 2.2-1.7 3.9-3.9 3.9H7c-2.2 0-3.9-1.7-3.9-3.9V7c0-2.2 1.7-3.9 3.9-3.9h7.6zM7 4.9c-1.2 0-2.1 1-2.1 2.1v10c0 1.2 1 2.1 2.1 2.1h10c1.2 0 2.1-1 2.1-2.1V9.3c0-.8-.3-1.5-.8-2l-2.4-2.3c-.4-.4-1-.7-1.6-.7H7z" fill="currentColor"/></svg><span>Documentos</span></div>
 <div class="nav-item" data-page="reports" onclick="nav('reports')"><svg viewBox="0 0 24 24" fill="none"><path d="M15.5 15.5c.5 0 .9.4.9.9s-.4.9-.9.9H8.5c-.5 0-.9-.4-.9-.9s.4-.9.9-.9h7zM12.3 11.1c.5 0 .9.4.9.9s-.4.9-.9.9H8.5c-.5 0-.9-.4-.9-.9s.4-.9.9-.9h3.8z" fill="currentColor"/></svg><span>Relatórios</span></div>
 
-<div class="nav-item" onclick="phlLogout()" style="margin-top:auto;background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#ef4444">
-  <svg viewBox="0 0 24 24" fill="none"><path d="M10 3H7c-2.2 0-4 1.8-4 4v10c0 2.2 1.8 4 4 4h3m10-6l3-3m0 0l-3-3m3 3H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  <span>Sair</span>
-</div>
 </aside>
 <main class="main" id="main"></main>
 </div>
@@ -184,16 +156,28 @@ tr:hover .row-actions,tr:focus-within .row-actions{opacity:1}
 <div class="modal-footer"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="saveForm()">Salvar</button></div>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 <script>
 
 const SK='gestao_v3';
-function ld(){try{const r=localStorage.getItem(SK);if(r)return JSON.parse(r)}catch(e){}return{companyBalance:0,transactions:[],budgets:[],invoices:[],clients:[],suppliers:[],events:[],documents:[]}}
-function sd(){localStorage.setItem(SK,JSON.stringify(data))}
-let data=ld(),page='dashboard',eid=null,etype=null,calD=new Date(),cview=null;
+const DATA_KEYS=['transactions','budgets','invoices','clients','suppliers','events','documents'];
+const EMPTY_DATA={companyBalance:0,transactions:[],budgets:[],invoices:[],clients:[],suppliers:[],events:[],documents:[]};
+function ld(){try{const r=localStorage.getItem(SK);if(r)return normalizeData(JSON.parse(r))}catch(e){}return structuredClone(EMPTY_DATA)}
+function normalizeData(value){const d=(value&&typeof value==='object')?value:{};const out={...structuredClone(EMPTY_DATA),...d};DATA_KEYS.forEach(k=>{if(!Array.isArray(out[k]))out[k]=[]});if(typeof out.companyBalance!=='number'||!Number.isFinite(out.companyBalance))out.companyBalance=0;return out}
+let cloudReady=false;
+let currentUser=null;
+async function sd(){
+  localStorage.setItem(SK,JSON.stringify(data));
+  if(!cloudReady || !window.supabaseClient || !currentUser) return;
+  const {error}=await window.supabaseClient.from('user_data').upsert({user_id:currentUser.id,data,updated_at:new Date().toISOString()});
+  if(error) console.error('Falha ao salvar os dados:',error);
+}
+let data=normalizeData(ld()),page='dashboard',eid=null,etype=null,calD=new Date(),cview=null;
 if(typeof data.companyBalance!=='number' || !Number.isFinite(data.companyBalance)) data.companyBalance=0;
 
 // Garante que instalações antigas ou dados incompletos tenham todas as coleções.
-const DATA_KEYS=['transactions','budgets','invoices','clients','suppliers','events','documents'];
+
 DATA_KEYS.forEach(k=>{if(!Array.isArray(data[k]))data[k]=[];});
 
 function seed(){
@@ -243,7 +227,6 @@ data.documents=[
 ];
 sd();
 }
-seed();
 
 const fm=n=>'R$ '+Number(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fd=d=>{if(!d)return '—';const[y,m,day]=String(d).split('-');return y&&m&&day?day+'/'+m+'/'+y:'—'};
@@ -610,73 +593,224 @@ try{
 sd();closeModal();render();
 }
 
-// Inicialização direta: o sistema não utiliza login.
-render();
+// =========================
+// AUTENTICAÇÃO REAL - SUPABASE (ROBUSTA)
+// =========================
+const SUPABASE_URL = String(window.PHL_SUPABASE_URL || '').trim();
+const SUPABASE_ANON_KEY = String(window.PHL_SUPABASE_ANON_KEY || '').trim();
+const authScreen=document.getElementById('auth-screen');
+const appContainer=document.getElementById('app-container');
+const authForm=document.getElementById('auth-form');
+const authEmail=document.getElementById('auth-email');
+const authPassword=document.getElementById('auth-password');
+const authError=document.getElementById('auth-error');
+const authSuccess=document.getElementById('auth-success');
+const authSubmit=document.getElementById('auth-submit');
+const forgotPassword=document.getElementById('forgot-password');
+const authConfigWarning=document.getElementById('auth-config-warning');
+let authInitError='';
 
-const PHL_AUTH_KEY = 'phl_auth_v1';
-const PHL_USER = 'admin';
-const PHL_PASS = 'admin';
-
-function phlHandleLogin(e){
-  e.preventDefault();
-  const user=(document.getElementById('phl-login-user')?.value||'').trim();
-  const pass=(document.getElementById('phl-login-pass')?.value||'').trim();
-  const error=document.getElementById('phl-login-error');
-
-  if(error) error.classList.remove('show');
-
-  if(user===PHL_USER && pass===PHL_PASS){
-    localStorage.setItem(PHL_AUTH_KEY, JSON.stringify({user:user, timestamp:Date.now()}));
-    phlShowApp();
-  }else{
-    if(error){
-      error.textContent='Usuário ou senha incorretos.';
-      error.classList.add('show');
-    }
+function showAuthError(message){
+  if(authSuccess) authSuccess.classList.remove('show');
+  if(authError){authError.textContent=message||'Não foi possível entrar.';authError.classList.add('show');}
+}
+function showAuthSuccess(message){
+  if(authError) authError.classList.remove('show');
+  if(authSuccess){authSuccess.textContent=message||'';authSuccess.classList.add('show');}
+}
+function clearAuthMessages(){
+  if(authError) authError.classList.remove('show');
+  if(authSuccess) authSuccess.classList.remove('show');
+}
+function showAuth(){
+  if(authScreen) authScreen.style.display='flex';
+  if(appContainer) appContainer.style.display='none';
+  clearAuthMessages();
+}
+function setConfigWarning(message){
+  authInitError=message;
+  if(authConfigWarning){
+    authConfigWarning.style.display='block';
+    authConfigWarning.textContent=message;
   }
 }
-
-function phlIsLogged(){
+function configLooksValid(){
+  if(!SUPABASE_URL || !SUPABASE_ANON_KEY) return false;
+  const placeholders=['COLE_AQUI','SEU_PROJETO','SUA_CHAVE','URL_DO_SEU','CHAVE_PUBLICA'];
+  if(placeholders.some(p=>SUPABASE_URL.toUpperCase().includes(p)||SUPABASE_ANON_KEY.toUpperCase().includes(p))) return false;
   try{
-    const raw=localStorage.getItem(PHL_AUTH_KEY);
-    if(!raw) return false;
-    const session=JSON.parse(raw);
-    return session && session.user===PHL_USER;
-  }catch(e){
+    const u=new URL(SUPABASE_URL);
+    if(!['https:','http:'].includes(u.protocol)) return false;
+  }catch(e){ return false; }
+  return SUPABASE_ANON_KEY.length>20;
+}
+
+// Inicializa o Supabase sem deixar um erro quebrar o restante do site.
+if(!configLooksValid()){
+  setConfigWarning('Configuração do Supabase inválida ou incompleta. Abra supabase-config.js e confira a Project URL e a Publishable key.');
+}else if(!window.supabase || typeof window.supabase.createClient!=='function'){
+  setConfigWarning('A biblioteca do Supabase não carregou. Verifique sua internet e atualize a página (Ctrl+F5).');
+}else{
+  try{
+    window.supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+    if(authConfigWarning) authConfigWarning.style.display='none';
+  }catch(err){
+    console.error('Falha ao iniciar Supabase:',err);
+    setConfigWarning('Não foi possível iniciar o Supabase. Confira se a Project URL está no formato https://SEU-PROJETO.supabase.co e se a Publishable key está correta.');
+  }
+}
+
+async function showAppForUser(user){
+  currentUser=user;
+  if(authScreen) authScreen.style.display='none';
+  if(appContainer) appContainer.style.display='flex';
+  await loadCloudData();
+  render();
+}
+async function loadCloudData(){
+  cloudReady=false;
+  if(!window.supabaseClient || !currentUser) return;
+  try{
+    const {data:row,error}=await window.supabaseClient.from('user_data').select('data').eq('user_id',currentUser.id).maybeSingle();
+    if(error){
+      console.error(error);
+      // Login é válido mesmo se a tabela ainda não estiver pronta.
+      showAuthError('Login realizado, mas o banco user_data não pôde ser carregado. Execute o supabase-schema.sql no SQL Editor.');
+      return;
+    }
+    if(row && row.data){
+      data=normalizeData(row.data);
+      localStorage.setItem(SK,JSON.stringify(data));
+    }else{
+      data=normalizeData(ld());
+      cloudReady=true;
+      await sd();
+    }
+    cloudReady=true;
+  }catch(err){
+    console.error('Erro ao carregar dados:',err);
+    showAuthError('Login realizado, mas houve falha ao acessar o banco de dados.');
+  }
+}
+
+async function phlLogout(){
+  if(!window.supabaseClient) return;
+  if(!confirm('Deseja sair do sistema?')) return;
+  try{
+    const {error}=await window.supabaseClient.auth.signOut({scope:'local'});
+    if(error){alert('Não foi possível sair: '+error.message);return;}
+    cloudReady=false;currentUser=null;showAuth();
+  }catch(err){alert('Não foi possível sair do sistema.');}
+}
+
+(function addUserMenu(){
+  const sidebar=document.querySelector('.sidebar');
+  if(!sidebar || document.getElementById('phl-real-logout')) return;
+  const item=document.createElement('div');
+  item.className='nav-item';item.id='phl-real-logout';item.style.cssText='margin-top:auto;background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#ef4444';
+  item.innerHTML='<svg viewBox="0 0 24 24" fill="none"><path d="M10 3H7c-2.2 0-4 1.8-4 4v10c0 2.2 1.8 4 4 4h3m10-6l3-3m0 0l-3-3m3 3H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sair</span>';
+  item.onclick=phlLogout;sidebar.appendChild(item);
+})();
+
+function friendlyAuthError(error){
+  const msg=String(error?.message||error||'');
+  if(/invalid login credentials/i.test(msg)) return 'E-mail ou senha incorretos.';
+  if(/email not confirmed/i.test(msg)) return 'Seu e-mail ainda não foi confirmado no Supabase.';
+  if(/failed to fetch|network|fetch/i.test(msg)) return 'Não foi possível conectar ao Supabase. Verifique a internet, a Project URL e tente novamente.';
+  if(/invalid api key|apikey/i.test(msg)) return 'A Publishable key do Supabase está incorreta.';
+  return msg || 'Não foi possível entrar. Verifique os dados e tente novamente.';
+}
+
+async function loginWithTimeout(email,password){
+  const loginPromise=window.supabaseClient.auth.signInWithPassword({email,password});
+  const timeoutPromise=new Promise((_,reject)=>setTimeout(()=>reject(new Error('Tempo limite de conexão excedido.')),20000));
+  return Promise.race([loginPromise,timeoutPromise]);
+}
+
+if(authForm){
+  authForm.addEventListener('submit',async e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    clearAuthMessages();
+    if(!window.supabaseClient){
+      showAuthError(authInitError || 'O Supabase não foi inicializado. Confira o arquivo supabase-config.js.');
+      return false;
+    }
+    const email=(authEmail?.value||'').trim();
+    const password=authPassword?.value||'';
+    if(!email || !password){showAuthError('Digite seu e-mail e sua senha.');return false;}
+    if(authSubmit){authSubmit.disabled=true;authSubmit.textContent='Entrando...';}
+    try{
+      const {data:result,error}=await loginWithTimeout(email,password);
+      if(error){showAuthError(friendlyAuthError(error));return false;}
+      if(!result?.user){showAuthError('O Supabase não retornou um usuário para esta conta.');return false;}
+      showAuthSuccess('Login confirmado. Carregando sistema...');
+      await showAppForUser(result.user);
+    }catch(err){
+      console.error('Erro no login:',err);
+      showAuthError(friendlyAuthError(err));
+    }finally{
+      if(authSubmit){authSubmit.disabled=false;authSubmit.textContent='Entrar no sistema';}
+    }
     return false;
+  });
+}else{
+  console.error('Formulário de login não encontrado.');
+}
+
+if(forgotPassword){
+  forgotPassword.addEventListener('click',async()=>{
+    clearAuthMessages();
+    if(!window.supabaseClient){showAuthError(authInitError || 'Configure o Supabase antes de usar a recuperação de senha.');return;}
+    const email=(authEmail?.value||'').trim();
+    if(!email){showAuthError('Digite seu e-mail para receber o link de recuperação.');authEmail?.focus();return;}
+    try{
+      const redirectTo=(window.location.protocol==='file:') ? undefined : window.location.origin+window.location.pathname;
+      const {error}=await window.supabaseClient.auth.resetPasswordForEmail(email, redirectTo?{redirectTo}:undefined);
+      if(error){showAuthError(friendlyAuthError(error));return;}
+      showAuthSuccess('Se existir uma conta para esse e-mail, você receberá as instruções para redefinir a senha.');
+    }catch(err){showAuthError(friendlyAuthError(err));}
+  });
+}
+
+if(window.supabaseClient){
+  window.supabaseClient.auth.onAuthStateChange(async(event,session)=>{
+    if(event==='SIGNED_OUT'){currentUser=null;cloudReady=false;showAuth();return;}
+    if(session?.user && !currentUser){await showAppForUser(session.user);}
+    if(event==='PASSWORD_RECOVERY') handlePasswordRecovery();
+  });
+  (async function initRealAuth(){
+    try{
+      const {data:authData,error}=await window.supabaseClient.auth.getSession();
+      if(error) console.warn('Sessão não carregada:',error);
+      if(authData?.session?.user){await showAppForUser(authData.session.user);}else{showAuth();}
+    }catch(err){console.error(err);showAuth();}
+  })();
+}else{
+  showAuth();
+}
+
+async function handlePasswordRecovery(){
+  if(!window.supabaseClient) return;
+  const newPassword=prompt('Digite sua nova senha (mínimo de 8 caracteres):');
+  if(!newPassword) return;
+  if(newPassword.length<8){alert('A senha deve ter pelo menos 8 caracteres.');return;}
+  const {error}=await window.supabaseClient.auth.updateUser({password:newPassword});
+  if(error) alert('Não foi possível alterar a senha: '+error.message);
+  else {alert('Senha alterada com sucesso.'); const r=await window.supabaseClient.auth.getUser(); if(r.data?.user) await showAppForUser(r.data.user);}
+}
+
+// Se algum erro JavaScript ocorrer enquanto a tela de login estiver aberta, mostre-o ao usuário.
+window.addEventListener('error',ev=>{
+  if(authScreen && authScreen.style.display!=='none'){
+    console.error(ev.error||ev.message);
+    if(!authError?.classList.contains('show')) showAuthError('O site encontrou um erro ao iniciar. Pressione Ctrl+F5 e, se continuar, confira o supabase-config.js.');
   }
-}
+});
+window.addEventListener('unhandledrejection',ev=>{
+  console.error(ev.reason);
+});
 
-function phlShowApp(){
-  const login=document.getElementById('phl-login-screen');
-  const app=document.querySelector('.app');
-  if(login) login.style.display='none';
-  if(app) app.style.display='flex';
-  if(typeof render==='function') render();
-}
-
-function phlShowLogin(){
-  const login=document.getElementById('phl-login-screen');
-  const app=document.querySelector('.app');
-  if(login) login.style.display='flex';
-  if(app) app.style.display='none';
-  const u=document.getElementById('phl-login-user');
-  const p=document.getElementById('phl-login-pass');
-  const er=document.getElementById('phl-login-error');
-  if(u) u.value='';
-  if(p) p.value='';
-  if(er) er.classList.remove('show');
-}
-
-function phlLogout(){
-  if(confirm('Deseja sair do sistema?')){
-    // Apenas encerra a sessão. Os dados cadastrados continuam salvos.
-    localStorage.removeItem(PHL_AUTH_KEY);
-    phlShowLogin();
-  }
-}
-
-if(phlIsLogged()){phlShowApp()}else{phlShowLogin()}
 </script>
 </body>
 </html>
