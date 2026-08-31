@@ -107,6 +107,44 @@ tr:hover .row-actions,tr:focus-within .row-actions{opacity:1}
 .auth-brand{text-align:center;margin-bottom:26px}.auth-logo{font-size:30px;font-weight:900;letter-spacing:.16em;color:#0f6fff}.auth-sub{font-size:12px;color:#64748b;text-transform:uppercase;font-weight:800;letter-spacing:.08em;margin-top:5px}.auth-badge{display:inline-block;margin-top:12px;padding:5px 11px;border-radius:999px;background:#dfeeff;color:#0f6fff;font-size:10px;font-weight:800;text-transform:uppercase}
 .auth-form{display:flex;flex-direction:column;gap:14px}.auth-group label{display:block;font-size:11px;color:#64748b;text-transform:uppercase;font-weight:800;margin-bottom:6px}.auth-input{width:100%;padding:12px 14px;border:1px solid #dbe3ee;border-radius:12px;font-size:14px;outline:none;background:#f9fbff;color:#0f172a}.auth-input:focus{border-color:#0f6fff;box-shadow:0 0 0 4px rgba(15,111,255,.10);background:#fff}.auth-btn{width:100%;padding:12px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#0f6fff,#0a4fb8);color:#fff;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 24px rgba(15,111,255,.26)}.auth-btn:disabled{opacity:.65;cursor:not-allowed}.auth-link{border:0;background:none;color:#0f6fff;font-size:12px;font-weight:700;cursor:pointer;padding:4px 0;text-align:right}.auth-error{display:none;padding:10px;border-radius:9px;background:#fee2e2;color:#991b1b;border:1px solid #fecaca;text-align:center;font-size:12px}.auth-error.show{display:block}.auth-success{display:none;padding:10px;border-radius:9px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;text-align:center;font-size:12px}.auth-success.show{display:block}.auth-footer{text-align:center;margin-top:18px;font-size:11px;color:#94a3b8}.auth-config{margin-top:12px;font-size:10px;color:#b45309;text-align:center}
 
+
+/* ===== PHL: leitura mais nítida / alto contraste ===== */
+:root{
+  --text:#07101f;
+  --muted:#334155;
+  --subtle:#475569;
+  --border:#cbd5e1;
+  --line:#cbd5e1;
+}
+html{font-size:16px}
+body{
+  color:var(--text);
+  font-weight:500;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:auto;
+  background:#f3f7fb;
+}
+.header h2,.modal-header h3,.chart-title,.doc-title,.client-detail h4{color:#07101f;font-weight:800}
+.nav-item{font-size:14px;font-weight:600;color:#eff6ff}
+.nav-item.active{font-weight:800}
+.card-label,.form-group label,.table th,.tab-btn{color:#334155;font-weight:800}
+.card-value{color:#07101f;font-weight:900}
+.table{font-size:14px}
+.table td{color:#111827;font-weight:550}
+.table th{font-size:12px;color:#334155;background:#eef4fb}
+.filters input,.filters select,.form-group input,.form-group select,.form-group textarea{color:#0f172a;font-weight:600;border-color:#cbd5e1;background:#fff}
+.filters input::placeholder,.form-group input::placeholder,.form-group textarea::placeholder{color:#64748b;opacity:1}
+.totals-bar{font-size:14px;color:#334155}
+.totals-bar b{color:#0f172a;font-weight:900;margin-left:4px}
+.report-box{font-size:14px;line-height:1.75;color:#0f172a;background:#fff;border-color:#cbd5e1;font-weight:600}
+.empty-state,.doc-meta,.client-detail p{color:#475569}
+.badge{font-size:12px;font-weight:800}
+.tx-receivable{color:#b45309!important;font-weight:900}
+.badge-receivable{background:#ffedd5;color:#9a3412;border-color:#fdba74}
+.week-controls{display:flex;gap:8px;align-items:end;flex-wrap:wrap;margin-bottom:14px;padding:12px;border:1px solid var(--border);border-radius:14px;background:#fff}
+.week-controls .form-group{margin:0;min-width:190px}
+@media(max-width:768px){html{font-size:15px}.table{font-size:13px}.week-controls{align-items:stretch}.week-controls .form-group{width:100%}}
+
 </style>
 <base target="_self">
 </head>
@@ -233,6 +271,8 @@ const fd=d=>{if(!d)return '—';const[y,m,day]=String(d).split('-');return y&&m&
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
 const eventTypeClass=(type)=>({maintenance:'maintenance',installation:'installation',inspection:'inspection',payment:'payment',meeting:'maintenance',delivery:'installation',other:'other'}[type]||'other');
 const sl=(s,t)=>{const m={budget:{pending:'Pendente',approved:'Aprovado',rejected:'Rejeitado',completed:'Concluído'},invoice:{issued:'Emitida',sent:'Enviada',paid:'Paga',cancelled:'Cancelada'},event:{meeting:'Reunião',delivery:'Entrega',payment:'Pagamento',maintenance:'Manutenção',installation:'Instalação',inspection:'Inspeção',other:'Outro'}};return m[t]?.[s]||s};
+const txLabel=t=>({income:'Ganho',expense:'Gasto',receivable:'A receber'}[t]||t);
+const txSign=t=>t==='income'?'+':t==='expense'?'-':'↗';
 
 function nav(p){page=p;cview=null;document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.page===p));render()}
 function render(){const m=document.getElementById('main');if(page==='dashboard')rd(m);else if(page==='transactions')rt(m);else if(page==='budgets')rb(m);else if(page==='invoices')ri(m);else if(page==='clients')rc(m);else if(page==='suppliers')rs(m);else if(page==='calendar')rl(m);else if(page==='documents')rdoc(m);else if(page==='reports')rr(m)}
@@ -240,13 +280,14 @@ function render(){const m=document.getElementById('main');if(page==='dashboard')
 function getMonthly(){
 const months={};const now=new Date();
 for(let i=5;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;months[k]={label:d.toLocaleString('pt-BR',{month:'short'}).replace('.',''),income:0,expense:0}}
-data.transactions.forEach(t=>{const k=t.date.slice(0,7);if(months[k]){if(t.type==='income')months[k].income+=t.amount;else months[k].expense+=t.amount}});
+data.transactions.forEach(t=>{const k=(t.date||'').slice(0,7);if(months[k]){if(t.type==='income')months[k].income+=t.amount;else if(t.type==='expense')months[k].expense+=t.amount}});
 return Object.values(months);
 }
 
 function rd(c){
 const ti=data.transactions.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
 const te=data.transactions.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+const tr=data.transactions.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
 const bal=data.companyBalance+ti-te;const pb=data.budgets.filter(b=>b.status==='pending').length;
 const ti2=data.invoices.length,pi=data.invoices.filter(i=>i.status==='paid').length;
 const nc=data.clients.length,ns=data.suppliers.length;
@@ -284,7 +325,8 @@ c.innerHTML=`<div class="header"><div><h2>Dashboard</h2><span style="font-size:1
 <div style="display:grid;gap:12px">
 <div class="card" style="background:linear-gradient(135deg,#dcfce7 0%,#e8f5e9 100%);border-color:#16a34a;border-width:2px"><div class="card-label">Ganhos totais</div><div style="font-size:32px;font-weight:800;color:#16a34a;letter-spacing:-.04em">${fm(ti)}</div></div>
 <div class="card" style="background:linear-gradient(135deg,#fee2e2 0%,#fce8e8 100%);border-color:#ef4444;border-width:2px"><div class="card-label">Gastos totais</div><div style="font-size:32px;font-weight:800;color:#ef4444;letter-spacing:-.04em">${fm(te)}</div></div>
-<div class="card" style="background:linear-gradient(135deg,#dfeeff 0%,#e8f1ff 100%);border-color:#0f6fff;border-width:2px"><div class="card-label">Saldo</div><div style="font-size:32px;font-weight:800;color:#0f6fff;letter-spacing:-.04em">${fm(bal)}</div></div>
+<div class="card" style="background:linear-gradient(135deg,#fff7ed 0%,#ffedd5 100%);border-color:#f59e0b;border-width:2px"><div class="card-label">A receber</div><div style="font-size:32px;font-weight:900;color:#b45309;letter-spacing:-.04em">${fm(tr)}</div></div>
+<div class="card" style="background:linear-gradient(135deg,#dfeeff 0%,#e8f1ff 100%);border-color:#0f6fff;border-width:2px"><div class="card-label">Saldo disponível</div><div style="font-size:32px;font-weight:900;color:#0f6fff;letter-spacing:-.04em">${fm(bal)}</div></div>
 </div>
 <div class="chart-container" style="padding:20px;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
 <div class="chart-title" style="margin-bottom:16px;width:100%">Proporção Ganhos vs Gastos</div>
@@ -302,14 +344,24 @@ ${pieChart}
 function rt(c){
 const ft=document.getElementById('txf')?.value||'all',sq=document.getElementById('txs')?.value||'';
 let list=data.transactions.slice().sort((a,b)=>b.date.localeCompare(a.date));
-if(ft!=='all')list=list.filter(t=>t.type===ft);if(sq)list=list.filter(t=>t.desc.toLowerCase().includes(sq.toLowerCase())||(t.client||'').toLowerCase().includes(sq.toLowerCase()));
-const tinc=list.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0),tex=list.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);const txBalance=data.companyBalance+tinc-tex;
-c.innerHTML=`<div class="header"><h2>Ganhos e gastos</h2><button class="btn btn-primary" onclick="openTx()">+ Novo</button></div>
-<div class="filters" style="padding:8px 10px;border:1px solid var(--border);background:rgba(255,255,255,.65);border-radius:14px;box-shadow:var(--shadow)"><select id="txf" onchange="render()" style="background:var(--panel);border-color:var(--border)"><option value="all">Todos</option><option value="income">Ganhos</option><option value="expense">Gastos</option></select><input type="text" id="txs" placeholder="Buscar..." oninput="render()" value="${sq}" style="flex:1;min-width:180px;background:var(--panel);border-color:var(--border)"></div>
-<div class="totals-bar" style="padding:12px 14px;background:linear-gradient(180deg,#f8fbff 0%,#f4f8ff 100%);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)"><span>Ganhos:<b style="color:var(--success)">${fm(tinc)}</b></span><span>Gastos:<b style="color:var(--danger)">${fm(tex)}</b></span><span>Saldo:<b style="color:${tinc-tex>=0?'var(--success)':'var(--danger)'}">${fm(tinc-tex)}</b></span></div>
-<div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Cliente</th><th style="text-align:right">Valor</th><th style="width:70px"></th></tr></thead><tbody>${list.length?list.map(t=>`<tr><td>${fd(t.date)}</td><td>${t.desc}</td><td>${t.cat}</td><td>${t.client||'—'}</td><td style="text-align:right" class="amount ${t.type}">${t.type==='income'?'+':'-'} ${fm(t.amount)}</td><td><div class="row-actions"><button class="icon-btn" onclick="editTx('${t.id}')"><svg viewBox="0 0 24 24" fill="none"><path d="M18 3.1c.4 0 .8.1 1.1.2.4.1.7.4 1 .6.3.3.5.6.6 1 .2.4.2.7.2 1.1 0 .4-.1.7-.2 1.1-.1.4-.4.7-.6 1l-2.4 2.4-8.5 8.5c-.6.6-1.4 1.1-2.3 1.3l-2.7.7c-.3.1-.6 0-.9-.3-.2-.2-.3-.5-.2-.9l.7-2.7c.2-.9.6-1.6 1.3-2.3l8.5-8.5 2.4-2.4c.3-.3.6-.5 1-.6.3-.2.7-.2 1.1-.2zm-4.5 5.1-7.1 7.1c-.4.4-.6.8-.8 1.3l-.4 1.1 1.1-.4c.5-.2.9-.4 1.3-.8l7.1-7.1-1.1-1.1zm2.8-2.8-1.6 1.6 1.1 1.1 1.6-1.6c.2-.2.2-.4 0-.6-.2-.2-.4-.2-.6 0l-.4-.4z" fill="currentColor"/></svg></button><button class="icon-btn" onclick="delTx('${t.id}')"><svg viewBox="0 0 24 24" fill="none"><path d="M8.1 3c0-.5.4-.9.9-.9h6c.5 0 .9.4.9.9s-.4.9-.9.9H9c-.5 0-.9-.4-.9-.9zM10 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9zM14 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9z" fill="currentColor"/><path fill-rule="evenodd" d="M5 5.9c.5 0 .9.4.9.9V18c0 .5.4.9.9.9h10.4c.5 0 .9-.4.9-.9V6.8c0-.5.4-.9.9-.9s.9.4.9.9V18c0 1.5-1.2 2.7-2.7 2.7H6.8C5.3 20.7 4.1 19.5 4.1 18V6.8c0-.5.4-.9.9-.9z" fill="currentColor"/></svg></button></div></td></tr>`).join(''):`<tr><td colspan="6"><div class="empty-state">Nenhum lançamento</div></td></tr>`}</tbody></table></div>`;
+if(ft!=='all')list=list.filter(t=>t.type===ft);
+if(sq)list=list.filter(t=>(t.desc||'').toLowerCase().includes(sq.toLowerCase())||(t.client||'').toLowerCase().includes(sq.toLowerCase())||(t.cat||'').toLowerCase().includes(sq.toLowerCase()));
+const tinc=list.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+const tex=list.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+const trec=list.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
+const txBalance=data.companyBalance+tinc-tex;
+c.innerHTML=`<div class="header"><h2>Ganhos, gastos e valores a receber</h2><button class="btn btn-primary" onclick="openTx()">+ Novo</button></div>
+<div class="filters"><select id="txf" onchange="render()"><option value="all" ${ft==='all'?'selected':''}>Todos</option><option value="income" ${ft==='income'?'selected':''}>Ganhos</option><option value="expense" ${ft==='expense'?'selected':''}>Gastos</option><option value="receivable" ${ft==='receivable'?'selected':''}>A receber</option></select><input type="text" id="txs" placeholder="Buscar descrição, cliente ou categoria..." oninput="render()" value="${sq}" style="flex:1;min-width:220px"></div>
+<div class="totals-bar"><span>Ganhos:<b style="color:var(--success)">${fm(tinc)}</b></span><span>Gastos:<b style="color:var(--danger)">${fm(tex)}</b></span><span>A receber:<b style="color:#b45309">${fm(trec)}</b></span><span>Saldo disponível:<b style="color:${txBalance>=0?'var(--success)':'var(--danger)'}">${fm(txBalance)}</b></span></div>
+<div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Categoria</th><th>Cliente</th><th style="text-align:right">Valor</th><th style="width:70px"></th></tr></thead><tbody>${list.length?list.map(t=>`<tr><td>${fd(t.date)}</td><td>${t.type==='receivable'?'<span class="badge badge-receivable">A receber</span>':`<span class="badge ${t.type==='income'?'ba':'br'}">${txLabel(t.type)}</span>`}</td><td>${t.desc}</td><td>${t.cat||'—'}</td><td>${t.client||'—'}</td><td style="text-align:right" class="amount ${t.type==='receivable'?'tx-receivable':t.type}">${txSign(t.type)} ${fm(t.amount)}</td><td><div class="row-actions"><button class="icon-btn" onclick="editTx('${t.id}')" title="Editar"><svg viewBox="0 0 24 24" fill="none"><path d="M18 3.1c.4 0 .8.1 1.1.2.4.1.7.4 1 .6.3.3.5.6.6 1 .2.4.2.7.2 1.1 0 .4-.1.7-.2 1.1-.1.4-.4.7-.6 1l-2.4 2.4-8.5 8.5c-.6.6-1.4 1.1-2.3 1.3l-2.7.7c-.3.1-.6 0-.9-.3-.2-.2-.3-.5-.2-.9l.7-2.7c.2-.9.6-1.6 1.3-2.3l8.5-8.5 2.4-2.4c.3-.3.6-.5 1-.6.3-.2.7-.2 1.1-.2zm-4.5 5.1-7.1 7.1c-.4.4-.6.8-.8 1.3l-.4 1.1 1.1-.4c.5-.2.9-.4 1.3-.8l7.1-7.1-1.1-1.1zm2.8-2.8-1.6 1.6 1.1 1.1 1.6-1.6c.2-.2.2-.4 0-.6-.2-.2-.4-.2-.6 0l-.4-.4z" fill="currentColor"/></svg></button><button class="icon-btn" onclick="delTx('${t.id}')" title="Excluir"><svg viewBox="0 0 24 24" fill="none"><path d="M8.1 3c0-.5.4-.9.9-.9h6c.5 0 .9.4.9.9s-.4.9-.9.9H9c-.5 0-.9-.4-.9-.9zM10 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9zM14 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9z" fill="currentColor"/><path fill-rule="evenodd" d="M5 5.9c.5 0 .9.4.9.9V18c0 .5.4.9.9.9h10.4c.5 0 .9-.4.9-.9V6.8c0-.5.4-.9.9-.9s.9.4.9.9V18c0 1.5-1.2 2.7-2.7 2.7H6.8C5.3 20.7 4.1 19.5 4.1 18V6.8c0-.5.4-.9.9-.9z" fill="currentColor"/></svg></button></div></td></tr>`).join(''):`<tr><td colspan="7"><div class="empty-state">Nenhum lançamento</div></td></tr>`}</tbody></table></div>`;
 }
-function openTx(id){etype='tx';eid=id||null;const t=id?data.transactions.find(x=>x.id===id):{};document.getElementById('modal-title').textContent=id?'Editar':'Novo lançamento';document.getElementById('modal-body').innerHTML=`<div class="form-row"><div class="form-group"><label>Tipo</label><select id="tx-type"><option value="income" ${t.type==='income'?'selected':''}>Ganho</option><option value="expense" ${t.type==='expense'?'selected':''}>Gasto</option></select></div><div class="form-group"><label>Valor</label><input type="number" step="0.01" id="tx-amount" value="${t.amount||''}"></div></div><div class="form-group"><label>Descrição</label><input type="text" id="tx-desc" value="${t.desc||''}"></div><div class="form-row"><div class="form-group"><label>Categoria</label><input type="text" id="tx-cat" value="${t.cat||''}"></div><div class="form-group"><label>Data</label><input type="date" id="tx-date" value="${t.date||new Date().toISOString().split('T')[0]}"></div></div><div class="form-group"><label>Cliente</label><select id="tx-client"><option value="">— Sem cliente —</option>${data.clients.map(c=>`<option value="${c.name}" ${t.client===c.name?'selected':''}>${c.name}</option>`).join('')}</select></div>`;const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';}}
+function openTx(id){
+etype='tx';eid=id||null;
+const t=id?data.transactions.find(x=>x.id===id):{};
+document.getElementById('modal-title').textContent=id?'Editar lançamento':'Novo lançamento';
+document.getElementById('modal-body').innerHTML=`<div class="form-row"><div class="form-group"><label>Tipo</label><select id="tx-type"><option value="income" ${t.type==='income'?'selected':''}>Ganho recebido</option><option value="expense" ${t.type==='expense'?'selected':''}>Gasto</option><option value="receivable" ${t.type==='receivable'?'selected':''}>A receber</option></select></div><div class="form-group"><label>Valor</label><input type="number" step="0.01" min="0" id="tx-amount" value="${t.amount||''}"></div></div><div class="form-group"><label>Descrição</label><input type="text" id="tx-desc" value="${t.desc||''}"></div><div class="form-row"><div class="form-group"><label>Categoria</label><input type="text" id="tx-cat" value="${t.cat||''}"></div><div class="form-group"><label>Data</label><input type="date" id="tx-date" value="${t.date||new Date().toISOString().split('T')[0]}"></div></div><div class="form-group"><label>Cliente</label><select id="tx-client"><option value="">— Sem cliente —</option>${data.clients.map(c=>`<option value="${c.name}" ${t.client===c.name?'selected':''}>${c.name}</option>`).join('')}</select></div>${id&&t.type==='receivable'?`<div style="padding:12px;background:#fff7ed;border:1px solid #fdba74;border-radius:12px;font-size:13px;color:#7c2d12"><b>Valor a receber:</b> quando o cliente pagar, você pode mudar o tipo acima para <b>Ganho recebido</b> e salvar.</div>`:''}`;
+const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';}
+}
 function editTx(id){openTx(id)}
 function delTx(id){if(confirm('Excluir?')){data.transactions=data.transactions.filter(t=>t.id!==id);sd();render()}}
 
@@ -419,25 +471,28 @@ function delDoc(id){if(confirm('Excluir documento?')){data.documents=data.docume
 function rr(c){
 const now=new Date();
 const currentMonth=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-const monthTx=data.transactions.filter(t=>t.date.startsWith(currentMonth));
+const monthTx=data.transactions.filter(t=>t.date&&t.date.startsWith(currentMonth));
 const monthIncome=monthTx.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
 const monthExpense=monthTx.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+const monthReceivable=monthTx.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
 const monthBalance=monthIncome-monthExpense;
-const monthBudgets=data.budgets.filter(b=>b.date.startsWith(currentMonth));
-const monthInvoices=data.invoices.filter(i=>i.date.startsWith(currentMonth));
+const monthBudgets=data.budgets.filter(b=>b.date&&b.date.startsWith(currentMonth));
+const monthInvoices=data.invoices.filter(i=>i.date&&i.date.startsWith(currentMonth));
 const monthPaid=monthInvoices.filter(i=>i.status==='paid').reduce((s,i)=>s+i.amount,0);
-const monthPending=monthInvoices.filter(i=>i.status!=='paid').reduce((s,i)=>s+i.amount,0);
+const monthPending=monthInvoices.filter(i=>i.status!=='paid'&&i.status!=='cancelled').reduce((s,i)=>s+i.amount,0);
 const allIncome=data.transactions.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
 const allExpense=data.transactions.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+const allReceivable=data.transactions.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
 const allBalance=data.companyBalance+allIncome-allExpense;
 const reportText=`RELATÓRIO MENSAL — ${now.toLocaleString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()}
 ═══════════════════════════════════════════════════
 
 RESUMO FINANCEIRO DO MÊS
 ───────────────────────────────────────────────────
-Total de ganhos:        ${fm(monthIncome)}
-Total de gastos:        ${fm(monthExpense)}
-Saldo do mês:           ${fm(monthBalance)}
+Ganhos recebidos:       ${fm(monthIncome)}
+Gastos:                 ${fm(monthExpense)}
+A receber:              ${fm(monthReceivable)}
+Saldo movimentado:      ${fm(monthBalance)}
 
 NOTAS FISCAIS DO MÊS
 ───────────────────────────────────────────────────
@@ -455,55 +510,107 @@ Concluídos:             ${monthBudgets.filter(b=>b.status==='completed').length
 
 RESUMO GERAL (ACUMULADO)
 ───────────────────────────────────────────────────
-Saldo manual da empresa: ${fm(data.companyBalance)}
-Ganhos totais:          ${fm(allIncome)}
+Saldo inicial/manual:   ${fm(data.companyBalance)}
+Ganhos recebidos:       ${fm(allIncome)}
 Gastos totais:          ${fm(allExpense)}
-Saldo acumulado:        ${fm(allBalance)}
+Total a receber:        ${fm(allReceivable)}
+Saldo disponível:       ${fm(allBalance)}
 Clientes cadastrados:   ${data.clients.length}
 Fornecedores:           ${data.suppliers.length}
-Documentos:             ${data.documents.length}
-
-PRÓXIMOS EVENTOS
-───────────────────────────────────────────────────
-${data.events.filter(e=>e.date>=now.toISOString().split('T')[0]).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5).map(e=>`${fd(e.date)} ${e.time} — ${e.title} (${sl(e.type,'event')})`).join('\n')||'Nenhum evento agendado'}
 
 ═══════════════════════════════════════════════════
 Gerado em ${fd(now.toISOString().split('T')[0])} às ${now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
-Sistema de Gestão Empresarial`;
-c.innerHTML=`<div class="header"><h2>Relatório mensal</h2><button class="btn btn-primary" onclick="copyReport()">📋 Copiar relatório</button></div>
-<div style="margin-bottom:16px"><div class="tabs"><button class="tab-btn active" onclick="showReportTab('monthly',this)">Mensal</button><button class="tab-btn" onclick="showReportTab('annual',this)">Anual</button></div></div>
+Sistema de Gestão PHL`;
+c.innerHTML=`<div class="header"><div><h2>Relatórios</h2><span style="font-size:12px;color:var(--muted);font-weight:800">Financeiro e operacional</span></div><button class="btn btn-primary" onclick="copyReport()">📋 Copiar relatório</button></div>
+<div style="margin-bottom:16px"><div class="tabs"><button class="tab-btn active" onclick="showReportTab('monthly',this)">Mensal</button><button class="tab-btn" onclick="showReportTab('weekly',this)">Semanal</button><button class="tab-btn" onclick="showReportTab('annual',this)">Anual</button></div></div>
 <div id="report-monthly"><div class="report-box">${reportText}</div></div>
+<div id="report-weekly" style="display:none"></div>
 <div id="report-annual" style="display:none"></div>`;
 }
 
 function showReportTab(tab,btn){
 document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
 btn.classList.add('active');
-if(tab==='monthly'){document.getElementById('report-monthly').style.display='block';document.getElementById('report-annual').style.display='none'}
-else{document.getElementById('report-monthly').style.display='none';document.getElementById('report-annual').style.display='block';renderAnnualReport()}
+['monthly','weekly','annual'].forEach(x=>{const el=document.getElementById('report-'+x);if(el)el.style.display=x===tab?'block':'none'});
+if(tab==='weekly')renderWeeklyReport();
+if(tab==='annual')renderAnnualReport();
+}
+
+function localDateKey(d){
+const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+return `${y}-${m}-${day}`;
+}
+function weekBounds(dateValue){
+const base=dateValue?new Date(dateValue+'T12:00:00'):new Date();
+const day=base.getDay();
+const diff=day===0?-6:1-day;
+const start=new Date(base);start.setDate(base.getDate()+diff);start.setHours(0,0,0,0);
+const end=new Date(start);end.setDate(start.getDate()+6);end.setHours(23,59,59,999);
+return {start,end};
+}
+function shiftWeek(days){
+const input=document.getElementById('week-reference');if(!input)return;
+const d=new Date((input.value||localDateKey(new Date()))+'T12:00:00');d.setDate(d.getDate()+days);input.value=localDateKey(d);renderWeeklyReport(input.value);
+}
+function renderWeeklyReport(referenceDate){
+const container=document.getElementById('report-weekly');if(!container)return;
+const ref=referenceDate||document.getElementById('week-reference')?.value||localDateKey(new Date());
+const {start,end}=weekBounds(ref);const startKey=localDateKey(start),endKey=localDateKey(end);
+const tx=data.transactions.filter(t=>t.date&&t.date>=startKey&&t.date<=endKey).sort((a,b)=>a.date.localeCompare(b.date));
+const inc=tx.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+const exp=tx.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+const rec=tx.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
+const events=data.events.filter(e=>e.date&&e.date>=startKey&&e.date<=endKey).sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
+const budgets=data.budgets.filter(b=>b.date&&b.date>=startKey&&b.date<=endKey);
+const invoices=data.invoices.filter(i=>i.date&&i.date>=startKey&&i.date<=endKey);
+const lines=tx.length?tx.map(t=>`${fd(t.date)} | ${txLabel(t.type).padEnd(10)} | ${fm(t.amount).padStart(14)} | ${t.desc}${t.client?' — '+t.client:''}`).join('\n'):'Nenhum lançamento nesta semana.';
+const weeklyText=`RELATÓRIO SEMANAL — ${fd(startKey)} A ${fd(endKey)}
+═══════════════════════════════════════════════════
+
+RESUMO FINANCEIRO
+───────────────────────────────────────────────────
+Ganhos recebidos:       ${fm(inc)}
+Gastos:                 ${fm(exp)}
+A receber:              ${fm(rec)}
+Saldo da semana:        ${fm(inc-exp)}
+
+LANÇAMENTOS DA SEMANA
+───────────────────────────────────────────────────
+${lines}
+
+MOVIMENTO OPERACIONAL
+───────────────────────────────────────────────────
+Orçamentos cadastrados: ${budgets.length}
+Notas fiscais:          ${invoices.length}
+Eventos/agenda:         ${events.length}
+
+${events.length?'EVENTOS DA SEMANA\n───────────────────────────────────────────────────\n'+events.map(e=>`${fd(e.date)} ${e.time||''} — ${e.title}`).join('\n')+'\n\n':''}═══════════════════════════════════════════════════
+Gerado em ${fd(localDateKey(new Date()))} às ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
+Sistema de Gestão PHL`;
+container.innerHTML=`<div class="week-controls"><button class="btn" onclick="shiftWeek(-7)">← Semana anterior</button><div class="form-group"><label>Escolha qualquer dia da semana</label><input type="date" id="week-reference" value="${ref}" onchange="renderWeeklyReport(this.value)"></div><button class="btn" onclick="shiftWeek(7)">Próxima semana →</button><button class="btn" onclick="document.getElementById('week-reference').value='${localDateKey(new Date())}';renderWeeklyReport('${localDateKey(new Date())}')">Semana atual</button></div><div class="report-box">${weeklyText}</div>`;
 }
 
 function renderAnnualReport(){
-const now=new Date();
-const year=now.getFullYear();
+const now=new Date();const year=now.getFullYear();
 let annualHtml='<div class="report-box">RESUMO ANUAL — '+year+'\n═══════════════════════════════════════════════════\n\n';
 for(let m=1;m<=12;m++){
 const monthKey=`${year}-${String(m).padStart(2,'0')}`;
-const monthTx=data.transactions.filter(t=>t.date.startsWith(monthKey));
+const monthTx=data.transactions.filter(t=>t.date&&t.date.startsWith(monthKey));
 const inc=monthTx.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
 const exp=monthTx.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
-if(inc>0||exp>0){
+const rec=monthTx.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
+if(inc>0||exp>0||rec>0){
 const monthName=new Date(year,m-1).toLocaleString('pt-BR',{month:'long'});
-annualHtml+=`${monthName.toUpperCase()}\nGanhos: ${fm(inc).padStart(15)}\nGastos: ${fm(exp).padStart(15)}\nSaldo:  ${fm(inc-exp).padStart(15)}\n\n`;
-}
-}
+annualHtml+=`${monthName.toUpperCase()}\nGanhos:     ${fm(inc).padStart(15)}\nGastos:     ${fm(exp).padStart(15)}\nA receber:  ${fm(rec).padStart(15)}\nSaldo:      ${fm(inc-exp).padStart(15)}\n\n`;
+}}
 annualHtml+='═══════════════════════════════════════════════════</div>';
 document.getElementById('report-annual').innerHTML=annualHtml;
 }
 
 function copyReport(){
-const text=document.querySelector('.report-box').innerText;
-navigator.clipboard.writeText(text).then(()=>alert('Relatório copiado! Cole no WhatsApp, e-mail ou envie para seu contador.'));
+const visible=[...document.querySelectorAll('[id^="report-"]')].find(el=>getComputedStyle(el).display!=='none');
+const box=visible?.querySelector('.report-box');if(!box){alert('Nenhum relatório disponível.');return}
+navigator.clipboard.writeText(box.innerText).then(()=>alert('Relatório copiado!')).catch(()=>alert('Não foi possível copiar automaticamente. Selecione o texto do relatório e copie manualmente.'));
 }
 
 async function readPdfFile(file){
