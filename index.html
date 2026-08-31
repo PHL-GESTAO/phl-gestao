@@ -145,6 +145,101 @@ body{
 .week-controls .form-group{margin:0;min-width:190px}
 @media(max-width:768px){html{font-size:15px}.table{font-size:13px}.week-controls{align-items:stretch}.week-controls .form-group{width:100%}}
 
+
+/* ===== PHL: padronização de TODOS os botões ===== */
+button,
+.btn,
+.btn-primary,
+.btn-danger,
+.btn-sm,
+.icon-btn,
+.tab-btn,
+.login-button,
+.phl-login-btn,
+a.btn,
+a.btn.btn-sm,
+.row-actions button,
+.modal-footer button,
+.week-controls button{
+  background:#0f6fff !important;
+  background-image:none !important;
+  color:#ffffff !important;
+  border-color:#0f6fff !important;
+  box-shadow:none !important;
+  font-weight:800 !important;
+}
+
+button:hover,
+.btn:hover,
+.btn-primary:hover,
+.btn-danger:hover,
+.btn-sm:hover,
+.icon-btn:hover,
+.tab-btn:hover,
+.tab-btn.active,
+.login-button:hover,
+.phl-login-btn:hover,
+a.btn:hover,
+a.btn.btn-sm:hover,
+.row-actions button:hover,
+.modal-footer button:hover,
+.week-controls button:hover{
+  background:#0a4fb8 !important;
+  background-image:none !important;
+  color:#ffffff !important;
+  border-color:#0a4fb8 !important;
+  transform:none !important;
+}
+
+button:focus,
+.btn:focus,
+.icon-btn:focus,
+.tab-btn:focus,
+.phl-login-btn:focus{
+  outline:none !important;
+  box-shadow:0 0 0 3px rgba(15,111,255,.22) !important;
+}
+
+button svg,
+.btn svg,
+.icon-btn svg,
+.row-actions button svg{
+  color:#ffffff !important;
+  fill:currentColor;
+}
+
+/* Botões pequenos de editar/excluir ficam azuis com ícone branco */
+.icon-btn{
+  width:30px !important;
+  height:30px !important;
+  border-radius:8px !important;
+}
+
+/* Abas também usam o mesmo padrão azul */
+.tabs{
+  gap:8px !important;
+  border-bottom:none !important;
+}
+.tab-btn{
+  border-radius:9px !important;
+  padding:8px 14px !important;
+}
+
+/* Links que funcionam como botão seguem o mesmo padrão */
+a.btn{
+  text-decoration:none !important;
+}
+
+/* Mantém inputs e selects com fundo claro — só botões ficam azuis */
+.filters select,
+.filters input,
+.form-group input,
+.form-group select,
+.form-group textarea{
+  background:#ffffff !important;
+  color:#0f172a !important;
+}
+
 </style>
 <base target="_self">
 </head>
