@@ -298,13 +298,24 @@ const DATA_KEYS=['transactions','budgets','invoices','clients','suppliers','even
 const EMPTY_DATA={companyBalance:0,transactions:[],budgets:[],invoices:[],clients:[],suppliers:[],events:[],documents:[]};
 function ld(){try{const r=localStorage.getItem(SK);if(r)return normalizeData(JSON.parse(r))}catch(e){}return structuredClone(EMPTY_DATA)}
 function normalizeData(value){const d=(value&&typeof value==='object')?value:{};const out={...structuredClone(EMPTY_DATA),...d};DATA_KEYS.forEach(k=>{if(!Array.isArray(out[k]))out[k]=[]});if(typeof out.companyBalance!=='number'||!Number.isFinite(out.companyBalance))out.companyBalance=0;return out}
+const PHL_COMPANY_ID='11111111-1111-4111-8111-111111111111';
 let cloudReady=false;
 let currentUser=null;
+let currentRole=null;
+let companyRealtimeChannel=null;
 async function sd(){
   localStorage.setItem(SK,JSON.stringify(data));
   if(!cloudReady || !window.supabaseClient || !currentUser) return;
-  const {error}=await window.supabaseClient.from('user_data').upsert({user_id:currentUser.id,data,updated_at:new Date().toISOString()});
-  if(error) console.error('Falha ao salvar os dados:',error);
+  const {error}=await window.supabaseClient
+    .from('company_data')
+    .upsert(
+      {company_id:PHL_COMPANY_ID,data,updated_at:new Date().toISOString()},
+      {onConflict:'company_id'}
+    );
+  if(error){
+    console.error('Falha ao salvar os dados compartilhados:',error);
+    alert('Não foi possível sincronizar esta alteração com o banco da PHL. Atualize a página e tente novamente.');
+  }
 }
 let data=normalizeData(ld()),page='dashboard',eid=null,etype=null,calD=new Date(),cview=null;
 if(typeof data.companyBalance!=='number' || !Number.isFinite(data.companyBalance)) data.companyBalance=0;
@@ -409,7 +420,7 @@ const incomeX=cx+r*Math.cos(-Math.PI/2+incomeAngle),incomeY=cy+r*Math.sin(-Math.
 const expenseX=cx+r*Math.cos(-Math.PI/2),expenseY=cy+r*Math.sin(-Math.PI/2);
 const pieChart=`<svg viewBox="0 0 240 240" style="width:100%;max-width:240px;height:240px"><circle cx="120" cy="120" r="90" fill="none" stroke="#e2e8f0" stroke-width="60"/><path d="M ${cx} ${cy} L ${expenseX} ${expenseY} A ${r} ${r} 0 ${incomeLarge} 1 ${incomeX} ${incomeY} Z" fill="#16a34a" opacity="0.85"/><path d="M ${cx} ${cy} L ${incomeX} ${incomeY} A ${r} ${r} 0 ${1-incomeLarge} 1 ${expenseX} ${expenseY} Z" fill="#ef4444" opacity="0.85"/><circle cx="120" cy="120" r="60" fill="white"/><text x="120" y="110" text-anchor="middle" font-size="24" font-weight="800" fill="#0f172a">${incomePerc}%</text><text x="120" y="135" text-anchor="middle" font-size="12" fill="#64748b">Ganhos</text></svg>`;
 
-c.innerHTML=`<div class="header"><div><h2>Dashboard</h2><span style="font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase">Visão geral</span></div><button class="btn" onclick="openCompanyBalance()">⚙ Saldo da empresa</button></div>
+c.innerHTML=`<div class="header"><div><h2>Dashboard</h2><span style="font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.05em;text-transform:uppercase">Base compartilhada PHL • sincronizada entre usuários</span></div><button class="btn" onclick="openCompanyBalance()">⚙ Saldo da empresa</button></div>
 <div class="card" style="margin-bottom:16px;background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-color:#3b82f6;border-width:2px">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
     <div><div class="card-label">Saldo da empresa</div><div style="font-size:30px;font-weight:800;color:#0f6fff;letter-spacing:-.04em">${fm(data.companyBalance)}</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Saldo inicial/manual informado pela empresa</div></div>
@@ -873,13 +884,40 @@ async function loadCloudData(){
   cloudReady=false;
   if(!window.supabaseClient || !currentUser) return;
   try{
-    const {data:row,error}=await window.supabaseClient.from('user_data').select('data').eq('user_id',currentUser.id).maybeSingle();
-    if(error){
-      console.error(error);
-      // Login é válido mesmo se a tabela ainda não estiver pronta.
-      showAuthError('Login realizado, mas o banco user_data não pôde ser carregado. Execute o supabase-schema.sql no SQL Editor.');
+    const {data:membership,error:membershipError}=await window.supabaseClient
+      .from('company_members')
+      .select('role')
+      .eq('company_id',PHL_COMPANY_ID)
+      .eq('user_id',currentUser.id)
+      .maybeSingle();
+
+    if(membershipError){
+      console.error('Falha ao verificar vínculo com a empresa:',membershipError);
+      showAuthError('Login realizado, mas não foi possível verificar seu acesso à empresa PHL.');
       return;
     }
+
+    if(!membership){
+      if(appContainer) appContainer.style.display='none';
+      if(authScreen) authScreen.style.display='flex';
+      showAuthError('Este usuário existe, mas ainda não foi autorizado a acessar os dados da PHL.');
+      return;
+    }
+
+    currentRole=membership.role||'member';
+
+    const {data:row,error}=await window.supabaseClient
+      .from('company_data')
+      .select('data,updated_at')
+      .eq('company_id',PHL_COMPANY_ID)
+      .maybeSingle();
+
+    if(error){
+      console.error(error);
+      showAuthError('Login realizado, mas o banco compartilhado da PHL não pôde ser carregado. Execute o arquivo MIGRACAO_PHL_COMPARTILHADA.sql no Supabase.');
+      return;
+    }
+
     if(row && row.data){
       data=normalizeData(row.data);
       localStorage.setItem(SK,JSON.stringify(data));
@@ -888,11 +926,42 @@ async function loadCloudData(){
       cloudReady=true;
       await sd();
     }
+
     cloudReady=true;
+    subscribeCompanyRealtime();
   }catch(err){
-    console.error('Erro ao carregar dados:',err);
-    showAuthError('Login realizado, mas houve falha ao acessar o banco de dados.');
+    console.error('Erro ao carregar dados compartilhados:',err);
+    showAuthError('Login realizado, mas houve falha ao acessar os dados compartilhados da PHL.');
   }
+}
+
+function subscribeCompanyRealtime(){
+  if(!window.supabaseClient || !currentUser) return;
+
+  if(companyRealtimeChannel){
+    try{window.supabaseClient.removeChannel(companyRealtimeChannel)}catch(e){}
+    companyRealtimeChannel=null;
+  }
+
+  companyRealtimeChannel=window.supabaseClient
+    .channel('phl-company-data')
+    .on(
+      'postgres_changes',
+      {
+        event:'UPDATE',
+        schema:'public',
+        table:'company_data',
+        filter:`company_id=eq.${PHL_COMPANY_ID}`
+      },
+      payload=>{
+        const incoming=payload?.new?.data;
+        if(!incoming) return;
+        data=normalizeData(incoming);
+        localStorage.setItem(SK,JSON.stringify(data));
+        if(document.visibilityState==='visible') render();
+      }
+    )
+    .subscribe();
 }
 
 async function phlLogout(){
@@ -901,7 +970,14 @@ async function phlLogout(){
   try{
     const {error}=await window.supabaseClient.auth.signOut({scope:'local'});
     if(error){alert('Não foi possível sair: '+error.message);return;}
-    cloudReady=false;currentUser=null;showAuth();
+    cloudReady=false;
+    currentUser=null;
+    currentRole=null;
+    if(companyRealtimeChannel){
+      try{window.supabaseClient.removeChannel(companyRealtimeChannel)}catch(e){}
+      companyRealtimeChannel=null;
+    }
+    showAuth();
   }catch(err){alert('Não foi possível sair do sistema.');}
 }
 
@@ -977,7 +1053,14 @@ if(forgotPassword){
 
 if(window.supabaseClient){
   window.supabaseClient.auth.onAuthStateChange(async(event,session)=>{
-    if(event==='SIGNED_OUT'){currentUser=null;cloudReady=false;showAuth();return;}
+    if(event==='SIGNED_OUT'){
+      currentUser=null;currentRole=null;cloudReady=false;
+      if(companyRealtimeChannel){
+        try{window.supabaseClient.removeChannel(companyRealtimeChannel)}catch(e){}
+        companyRealtimeChannel=null;
+      }
+      showAuth();return;
+    }
     if(session?.user && !currentUser){await showAppForUser(session.user);}
     if(event==='PASSWORD_RECOVERY') handlePasswordRecovery();
   });
