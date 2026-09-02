@@ -82,7 +82,7 @@ tr:hover .row-actions,tr:focus-within .row-actions{opacity:1}
 .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .cal-header{text-align:center;font-size:12px;color:var(--subtle);padding:8px;font-weight:500}
 .cal-day{border:1px solid var(--border);border-radius:6px;padding:6px;min-height:72px;font-size:11px;cursor:pointer;transition:all .1s;background:var(--panel)}
-.cal-day:hover{border-color:var(--primary)}.cal-day.today{background:#f3f4f6;border-color:var(--primary)}
+.cal-day:hover{border-color:var(--primary)}.cal-day.today{background:#eff6ff;border-color:var(--primary)}
 .cal-day-num{font-size:12px;font-weight:500;margin-bottom:4px}
 .cal-event{font-size:10px;padding:2px 5px;border-radius:3px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
 .ce-maintenance{background:#dbeafe;color:#1e40af}.ce-installation{background:#e0f2fe;color:#0f766e}.ce-inspection{background:#dcfce7;color:#166534}.ce-payment{background:#fee2e2;color:#991b1b}.ce-other{background:#f3f4f6;color:#6b7280}
@@ -104,8 +104,8 @@ tr:hover .row-actions,tr:focus-within .row-actions{opacity:1}
 
 #auth-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#0f6fff 0%,#0a4fb8 52%,#091c2f 100%)}
 .auth-card{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:36px;box-shadow:0 30px 80px rgba(2,6,23,.30)}
-.auth-brand{text-align:center;margin-bottom:26px}.auth-logo{font-size:30px;font-weight:900;letter-spacing:.16em;color:#ca8a04}.auth-sub{font-size:12px;color:#64748b;text-transform:uppercase;font-weight:800;letter-spacing:.08em;margin-top:5px}.auth-badge{display:inline-block;margin-top:12px;padding:5px 11px;border-radius:999px;background:#dfeeff;color:#ca8a04;font-size:10px;font-weight:800;text-transform:uppercase}
-.auth-form{display:flex;flex-direction:column;gap:14px}.auth-group label{display:block;font-size:11px;color:#64748b;text-transform:uppercase;font-weight:800;margin-bottom:6px}.auth-input{width:100%;padding:12px 14px;border:1px solid #dbe3ee;border-radius:12px;font-size:14px;outline:none;background:#f9fbff;color:#0f172a}.auth-input:focus{border-color:#ca8a04;box-shadow:0 0 0 4px rgba(15,111,255,.10);background:#fff}.auth-btn{width:100%;padding:12px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#0f6fff,#0a4fb8);color:#fff;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 24px rgba(15,111,255,.26)}.auth-btn:disabled{opacity:.65;cursor:not-allowed}.auth-link{border:0;background:none;color:#ca8a04;font-size:12px;font-weight:700;cursor:pointer;padding:4px 0;text-align:right}.auth-error{display:none;padding:10px;border-radius:9px;background:#fee2e2;color:#991b1b;border:1px solid #fecaca;text-align:center;font-size:12px}.auth-error.show{display:block}.auth-success{display:none;padding:10px;border-radius:9px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;text-align:center;font-size:12px}.auth-success.show{display:block}.auth-footer{text-align:center;margin-top:18px;font-size:11px;color:#94a3b8}.auth-config{margin-top:12px;font-size:10px;color:#b45309;text-align:center}
+.auth-brand{text-align:center;margin-bottom:26px}.auth-logo{font-size:30px;font-weight:900;letter-spacing:.16em;color:#0f6fff}.auth-sub{font-size:12px;color:#64748b;text-transform:uppercase;font-weight:800;letter-spacing:.08em;margin-top:5px}.auth-badge{display:inline-block;margin-top:12px;padding:5px 11px;border-radius:999px;background:#dfeeff;color:#0f6fff;font-size:10px;font-weight:800;text-transform:uppercase}
+.auth-form{display:flex;flex-direction:column;gap:14px}.auth-group label{display:block;font-size:11px;color:#64748b;text-transform:uppercase;font-weight:800;margin-bottom:6px}.auth-input{width:100%;padding:12px 14px;border:1px solid #dbe3ee;border-radius:12px;font-size:14px;outline:none;background:#f9fbff;color:#0f172a}.auth-input:focus{border-color:#0f6fff;box-shadow:0 0 0 4px rgba(15,111,255,.10);background:#fff}.auth-btn{width:100%;padding:12px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#0f6fff,#0a4fb8);color:#fff;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 24px rgba(15,111,255,.26)}.auth-btn:disabled{opacity:.65;cursor:not-allowed}.auth-link{border:0;background:none;color:#0f6fff;font-size:12px;font-weight:700;cursor:pointer;padding:4px 0;text-align:right}.auth-error{display:none;padding:10px;border-radius:9px;background:#fee2e2;color:#991b1b;border:1px solid #fecaca;text-align:center;font-size:12px}.auth-error.show{display:block}.auth-success{display:none;padding:10px;border-radius:9px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;text-align:center;font-size:12px}.auth-success.show{display:block}.auth-footer{text-align:center;margin-top:18px;font-size:11px;color:#94a3b8}.auth-config{margin-top:12px;font-size:10px;color:#b45309;text-align:center}
 
 
 /* ===== PHL: leitura mais nítida / alto contraste ===== */
@@ -124,11 +124,11 @@ body{
   -webkit-font-smoothing:auto;
   background:#f3f7fb;
 }
-.header h2,.modal-header h3,.chart-title,.doc-title,.client-detail h4{color:#111111;font-weight:800}
+.header h2,.modal-header h3,.chart-title,.doc-title,.client-detail h4{color:#07101f;font-weight:800}
 .nav-item{font-size:14px;font-weight:600;color:#eff6ff}
 .nav-item.active{font-weight:800}
 .card-label,.form-group label,.table th,.tab-btn{color:#334155;font-weight:800}
-.card-value{color:#111111;font-weight:900}
+.card-value{color:#07101f;font-weight:900}
 .table{font-size:14px}
 .table td{color:#111827;font-weight:550}
 .table th{font-size:12px;color:#334155;background:#eef4fb}
@@ -137,7 +137,7 @@ body{
 .totals-bar{font-size:14px;color:#334155}
 .totals-bar b{color:#0f172a;font-weight:900;margin-left:4px}
 .report-box{font-size:14px;line-height:1.75;color:#0f172a;background:#fff;border-color:#cbd5e1;font-weight:600}
-.empty-state,.doc-meta,.client-detail p{color:#4b5563}
+.empty-state,.doc-meta,.client-detail p{color:#475569}
 .badge{font-size:12px;font-weight:800}
 .tx-receivable{color:#b45309!important;font-weight:900}
 .badge-receivable{background:#ffedd5;color:#9a3412;border-color:#fdba74}
@@ -164,7 +164,7 @@ a.btn.btn-sm,
   background:#0f6fff !important;
   background-image:none !important;
   color:#ffffff !important;
-  border-color:#ca8a04 !important;
+  border-color:#0f6fff !important;
   box-shadow:none !important;
   font-weight:800 !important;
 }
@@ -256,8 +256,8 @@ a.btn{
 }
 
 .cal-day:hover{
-  background:#f3f4f6 !important;
-  border-color:#ca8a04 !important;
+  background:#eff6ff !important;
+  border-color:#0f6fff !important;
 }
 
 .cal-day-num{
@@ -269,7 +269,7 @@ a.btn{
 /* Dia atual: azul com número branco */
 .cal-day.today{
   background:#0f6fff !important;
-  border-color:#ca8a04 !important;
+  border-color:#0f6fff !important;
   color:#ffffff !important;
 }
 
@@ -347,7 +347,7 @@ a.btn{
 }
 
 .doc-meta{
-  color:#4b5563 !important;
+  color:#475569 !important;
   font-weight:600 !important;
 }
 
@@ -633,7 +633,7 @@ const pieChart=`<svg viewBox="0 0 240 240" style="width:100%;max-width:240px;hei
 c.innerHTML=`<div class="header"><div><h2>Dashboard</h2><span style="font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.05em;text-transform:uppercase">Base compartilhada PHL • sincronizada entre usuários</span></div><button class="btn" onclick="openCompanyBalance()">⚙ Saldo da empresa</button></div>
 <div class="card" style="margin-bottom:16px;background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-color:#3b82f6;border-width:2px">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
-    <div><div class="card-label">Saldo da empresa</div><div style="font-size:30px;font-weight:800;color:#ca8a04;letter-spacing:-.04em">${fm(data.companyBalance)}</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Saldo inicial/manual informado pela empresa</div></div>
+    <div><div class="card-label">Saldo da empresa</div><div style="font-size:30px;font-weight:800;color:#0f6fff;letter-spacing:-.04em">${fm(data.companyBalance)}</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Saldo inicial/manual informado pela empresa</div></div>
     <button class="btn btn-primary" onclick="openCompanyBalance()">Alterar saldo</button>
   </div>
 </div>
@@ -642,7 +642,7 @@ c.innerHTML=`<div class="header"><div><h2>Dashboard</h2><span style="font-size:1
 <div class="card" style="background:linear-gradient(135deg,#dcfce7 0%,#e8f5e9 100%);border-color:#16a34a;border-width:2px"><div class="card-label">Ganhos totais</div><div style="font-size:32px;font-weight:800;color:#16a34a;letter-spacing:-.04em">${fm(ti)}</div></div>
 <div class="card" style="background:linear-gradient(135deg,#fee2e2 0%,#fce8e8 100%);border-color:#ef4444;border-width:2px"><div class="card-label">Gastos totais</div><div style="font-size:32px;font-weight:800;color:#ef4444;letter-spacing:-.04em">${fm(te)}</div></div>
 <div class="card" style="background:linear-gradient(135deg,#fff7ed 0%,#ffedd5 100%);border-color:#f59e0b;border-width:2px"><div class="card-label">A receber</div><div style="font-size:32px;font-weight:900;color:#b45309;letter-spacing:-.04em">${fm(tr)}</div></div>
-<div class="card" style="background:linear-gradient(135deg,#dfeeff 0%,#e8f1ff 100%);border-color:#ca8a04;border-width:2px"><div class="card-label">Saldo disponível</div><div style="font-size:32px;font-weight:900;color:#ca8a04;letter-spacing:-.04em">${fm(bal)}</div></div>
+<div class="card" style="background:linear-gradient(135deg,#dfeeff 0%,#e8f1ff 100%);border-color:#0f6fff;border-width:2px"><div class="card-label">Saldo disponível</div><div style="font-size:32px;font-weight:900;color:#0f6fff;letter-spacing:-.04em">${fm(bal)}</div></div>
 </div>
 <div class="chart-container" style="padding:20px;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
 <div class="chart-title" style="margin-bottom:16px;width:100%">Proporção Ganhos vs Gastos</div>
@@ -718,7 +718,7 @@ document.getElementById('modal-body').innerHTML=`
   <div class="form-group"><label>Desconto</label><input type="number" min="0" step="0.01" id="bg-discount" value="${discount||''}" oninput="updateBudgetTotalPreview()"></div>
   <div class="form-group"><label>Status</label><select id="bg-status"><option value="pending" ${b.status==='pending'?'selected':''}>Pendente</option><option value="approved" ${b.status==='approved'?'selected':''}>Aprovado</option><option value="rejected" ${b.status==='rejected'?'selected':''}>Rejeitado</option><option value="completed" ${b.status==='completed'?'selected':''}>Concluído</option></select></div>
 </div>
-<div style="padding:14px;background:#f3f4f6;border:1px solid #bfdbfe;border-radius:14px;margin-bottom:14px"><div style="font-size:11px;color:#334155;font-weight:900;text-transform:uppercase">Total do orçamento</div><div id="bg-total-preview" style="font-size:28px;font-weight:900;color:#ca8a04">${fm(Math.max(subtotal+expenses-discount,0))}</div></div>
+<div style="padding:14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;margin-bottom:14px"><div style="font-size:11px;color:#334155;font-weight:900;text-transform:uppercase">Total do orçamento</div><div id="bg-total-preview" style="font-size:28px;font-weight:900;color:#0f6fff">${fm(Math.max(subtotal+expenses-discount,0))}</div></div>
 <div class="form-group"><label>Condições de pagamento</label><input type="text" id="bg-payment" value="${budgetHtmlEsc(b.paymentTerms||'PIX OU BOLETO')}" placeholder="Ex: PIX OU BOLETO / 50% entrada + 50% conclusão"></div>
 <div class="form-row">
   <div class="form-group"><label>Garantia</label><input type="text" id="bg-warranty" value="${budgetHtmlEsc(b.warranty||'')}" placeholder="Ex: 90 dias para o serviço executado"></div>
@@ -757,10 +757,10 @@ html,body{margin:0;padding:0;background:#e5e7eb;font-family:Arial,Helvetica,sans
 .brand h1{font-size:17px;margin:0 0 4px;color:#111111}.brand p,.contact p{margin:2px 0;font-size:10.5px;color:#4b5563;line-height:1.35}
 .contact{text-align:right}.contact strong{color:#ca8a04}
 .hero{margin-top:18px;border-radius:16px;padding:17px 19px;background:linear-gradient(135deg,#1f2937,#111111);color:white;display:flex;align-items:center;justify-content:space-between}
-.hero small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.13em;opacity:.88;margin-bottom:4px;color:#facc15}.hero h2{margin:0;font-size:25px;letter-spacing:-.02em;color:#ffffff}.hero .number{text-align:right;font-size:22px;font-weight:900;color:#ffffff}
+.hero small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.13em;opacity:.9;margin-bottom:4px;color:#facc15}.hero h2{margin:0;font-size:25px;letter-spacing:-.02em;color:#ffffff}.hero .number{text-align:right;font-size:22px;font-weight:900;color:#ffffff}
 .grid{display:grid;grid-template-columns:1.45fr .75fr;gap:12px;margin-top:14px}.card{border:1px solid #d1d5db;border-radius:14px;padding:13px 15px;background:#ffffff}.card-title{font-size:9.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ca8a04;margin-bottom:8px}.client-name{font-size:15px;font-weight:900;margin-bottom:5px}.info{font-size:10.5px;color:#4b5563;line-height:1.5}.dates{display:grid;grid-template-columns:1fr;gap:8px}.date-row{display:flex;justify-content:space-between;gap:12px;font-size:10.5px}.date-row span:first-child{color:#64748b}.date-row strong{color:#0f172a}
 .section-title{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#334155;margin:18px 0 7px}
-table{width:100%;border-collapse:separate;border-spacing:0;font-size:10px;border:1px solid #d1d5db;border-radius:12px;overflow:hidden}th{background:#f3f4f6;color:#111111;font-size:9px;text-transform:uppercase;letter-spacing:.04em;padding:9px 8px;text-align:left;border-bottom:1px solid #d1d5db}td{padding:10px 8px;border-top:1px solid #e5eaf1;vertical-align:top}.center{text-align:center}.money{text-align:right;white-space:nowrap;font-weight:700}.item-num{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:7px;background:#e8f1ff;color:#ca8a04;font-weight:900;margin-right:7px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:10px;border:1px solid #d1d5db;border-radius:12px;overflow:hidden}th{background:#f3f4f6;color:#111111;font-size:9px;text-transform:uppercase;letter-spacing:.04em;padding:9px 8px;text-align:left}td{padding:10px 8px;border-top:1px solid #e5eaf1;vertical-align:top}.center{text-align:center}.money{text-align:right;white-space:nowrap;font-weight:700}.item-num{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:7px;background:#facc15;color:#111111;font-weight:900;margin-right:7px}
 .summary-wrap{display:flex;justify-content:flex-end;margin-top:14px}.summary{width:49%;border:1px solid #d1d5db;border-radius:14px;padding:12px 14px}.sum-row{display:flex;justify-content:space-between;font-size:10.5px;padding:5px 0;color:#4b5563}.sum-row strong{color:#0f172a}.sum-total{margin-top:5px;padding-top:10px;border-top:2px solid #dbe4ef;font-size:15px;font-weight:900;color:#111111}.sum-total strong{color:#ca8a04}
 .notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.note{border:1px solid #d1d5db;border-radius:13px;padding:11px 13px;min-height:67px}.note strong{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:#ca8a04}.note p{font-size:10.5px;color:#4b5563;line-height:1.5;margin:6px 0 0;white-space:pre-wrap}
 .footer{margin-top:22px;padding-top:11px;border-top:1px solid #dbe4ef;display:flex;justify-content:space-between;font-size:9px;color:#64748b}.footer strong{color:#334155}
@@ -859,7 +859,7 @@ c.innerHTML=`<div class="header"><div><h2>Contas a pagar</h2><span style="font-s
 function openSp(id){
 etype='sp';eid=id||null;const p=id?data.suppliers.find(x=>x.id===id):{};const total=payableTotal(p),paid=payablePaid(p);
 document.getElementById('modal-title').textContent=id?'Editar conta a pagar':'Nova conta a pagar';
-document.getElementById('modal-body').innerHTML=`<div class="form-row"><div class="form-group"><label>Quem deve receber / Nome da conta</label><input type="text" id="sp-name" value="${p.name||''}" placeholder="Ex: João - diária, DAS, INSS, Fornecedor X"></div><div class="form-group"><label>Tipo</label><select id="sp-cat"><option value="employee" ${p.category==='employee'?'selected':''}>Funcionário / Diária</option><option value="tax" ${p.category==='tax'?'selected':''}>Imposto / Tributo</option><option value="supplier" ${p.category==='supplier'?'selected':''}>Fornecedor / Material</option><option value="service" ${p.category==='service'?'selected':''}>Serviço</option><option value="rent" ${p.category==='rent'?'selected':''}>Aluguel</option><option value="utility" ${p.category==='utility'?'selected':''}>Conta fixa</option><option value="other" ${!['employee','tax','supplier','service','rent','utility'].includes(p.category)?'selected':''}>Outro</option></select></div></div><div class="form-group"><label>Descrição</label><input type="text" id="sp-desc" value="${p.description||''}" placeholder="Ex: Diária de instalação 01/09, imposto do mês, compra de material"></div><div class="form-row"><div class="form-group"><label>Valor total (R$)</label><input type="number" min="0" step="0.01" id="sp-total" value="${total||''}" oninput="updatePayablePreview()"></div><div class="form-group"><label>Valor já pago (R$)</label><input type="number" min="0" step="0.01" id="sp-paid" value="${paid||''}" oninput="updatePayablePreview()"></div></div><div style="padding:13px 14px;background:#f3f4f6;border:1px solid #bfdbfe;border-radius:12px;margin-bottom:8px"><div style="font-size:11px;font-weight:900;color:#334155;text-transform:uppercase">Falta pagar</div><div id="sp-preview-remaining" style="font-size:26px;font-weight:900;color:#ca8a04">${fm(Math.max(total-paid,0))}</div></div><div style="font-size:11px;color:var(--muted);margin:0 0 14px">Para pagamentos novos, use o botão <b>Pagar</b> na lista. Ele atualiza o restante e lança o valor automaticamente em Ganhos/Gastos.</div><div class="form-row"><div class="form-group"><label>Vencimento / Data prevista</label><input type="date" id="sp-due" value="${p.dueDate||new Date().toISOString().split('T')[0]}"></div><div class="form-group"><label>Telefone (opcional)</label><input type="text" id="sp-phone" value="${p.phone||''}"></div></div><div class="form-group"><label>Observações</label><textarea id="sp-notes">${p.notes||''}</textarea></div>`;const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden'}
+document.getElementById('modal-body').innerHTML=`<div class="form-row"><div class="form-group"><label>Quem deve receber / Nome da conta</label><input type="text" id="sp-name" value="${p.name||''}" placeholder="Ex: João - diária, DAS, INSS, Fornecedor X"></div><div class="form-group"><label>Tipo</label><select id="sp-cat"><option value="employee" ${p.category==='employee'?'selected':''}>Funcionário / Diária</option><option value="tax" ${p.category==='tax'?'selected':''}>Imposto / Tributo</option><option value="supplier" ${p.category==='supplier'?'selected':''}>Fornecedor / Material</option><option value="service" ${p.category==='service'?'selected':''}>Serviço</option><option value="rent" ${p.category==='rent'?'selected':''}>Aluguel</option><option value="utility" ${p.category==='utility'?'selected':''}>Conta fixa</option><option value="other" ${!['employee','tax','supplier','service','rent','utility'].includes(p.category)?'selected':''}>Outro</option></select></div></div><div class="form-group"><label>Descrição</label><input type="text" id="sp-desc" value="${p.description||''}" placeholder="Ex: Diária de instalação 01/09, imposto do mês, compra de material"></div><div class="form-row"><div class="form-group"><label>Valor total (R$)</label><input type="number" min="0" step="0.01" id="sp-total" value="${total||''}" oninput="updatePayablePreview()"></div><div class="form-group"><label>Valor já pago (R$)</label><input type="number" min="0" step="0.01" id="sp-paid" value="${paid||''}" oninput="updatePayablePreview()"></div></div><div style="padding:13px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;margin-bottom:8px"><div style="font-size:11px;font-weight:900;color:#334155;text-transform:uppercase">Falta pagar</div><div id="sp-preview-remaining" style="font-size:26px;font-weight:900;color:#0f6fff">${fm(Math.max(total-paid,0))}</div></div><div style="font-size:11px;color:var(--muted);margin:0 0 14px">Para pagamentos novos, use o botão <b>Pagar</b> na lista. Ele atualiza o restante e lança o valor automaticamente em Ganhos/Gastos.</div><div class="form-row"><div class="form-group"><label>Vencimento / Data prevista</label><input type="date" id="sp-due" value="${p.dueDate||new Date().toISOString().split('T')[0]}"></div><div class="form-group"><label>Telefone (opcional)</label><input type="text" id="sp-phone" value="${p.phone||''}"></div></div><div class="form-group"><label>Observações</label><textarea id="sp-notes">${p.notes||''}</textarea></div>`;const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden'}
 }
 function updatePayablePreview(){const total=parseFloat(document.getElementById('sp-total')?.value)||0,paid=parseFloat(document.getElementById('sp-paid')?.value)||0;const el=document.getElementById('sp-preview-remaining');if(el)el.textContent=fm(Math.max(total-paid,0))}
 function quickPaySp(id){const p=data.suppliers.find(x=>x.id===id);if(!p)return;const remaining=payableRemaining(p);if(remaining<=0){alert('Esta conta já está paga.');return}const input=prompt(`Quanto você está pagando agora?\nFalta atualmente: ${fm(remaining)}`,'');if(input===null)return;const value=Number(String(input).replace(',','.'));if(!Number.isFinite(value)||value<=0){alert('Digite um valor válido.');return}if(value>remaining){alert(`O valor não pode ser maior que o restante (${fm(remaining)}).`);return}p.totalAmount=payableTotal(p);p.paidAmount=payablePaid(p)+value;p.balance=payableRemaining(p);data.transactions.push({id:uid(),type:'expense',desc:`Pagamento: ${p.name}${p.description?' — '+p.description:''}`,amount:value,date:localDateKey(new Date()),cat:'Contas a pagar',client:''});sd();render()}
@@ -1130,7 +1130,7 @@ function openCompanyBalance(){
       <label>Saldo atual da empresa (R$)</label>
       <input type="number" step="0.01" id="company-balance" value="${Number(data.companyBalance||0).toFixed(2)}" placeholder="0,00" autofocus>
     </div>
-    <div style="padding:12px 14px;background:#f3f4f6;border:1px solid #bfdbfe;border-radius:10px;color:#111111;font-size:12px;line-height:1.6">
+    <div style="padding:12px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;color:#1e3a8a;font-size:12px;line-height:1.6">
       <strong>Como funciona:</strong> este é o saldo manual da empresa. Os lançamentos de ganhos e gastos são somados a ele para mostrar o saldo disponível no Dashboard.
     </div>
   `;
