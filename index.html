@@ -240,6 +240,56 @@ a.btn{
   color:#0f172a !important;
 }
 
+
+/* ===== PHL: calendário mais claro e legível ===== */
+.cal-header{
+  color:#0f172a !important;
+  font-weight:900 !important;
+  font-size:12px !important;
+}
+
+.cal-day{
+  background:#ffffff !important;
+  border:1px solid #cbd5e1 !important;
+  color:#0f172a !important;
+  box-shadow:0 1px 2px rgba(15,23,42,.05);
+}
+
+.cal-day:hover{
+  background:#eff6ff !important;
+  border-color:#0f6fff !important;
+}
+
+.cal-day-num{
+  color:#0f172a !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+}
+
+/* Dia atual: azul com número branco */
+.cal-day.today{
+  background:#0f6fff !important;
+  border-color:#0f6fff !important;
+  color:#ffffff !important;
+}
+
+.cal-day.today .cal-day-num{
+  color:#ffffff !important;
+}
+
+/* Mantém os espaços vazios do começo do mês invisíveis */
+.cal-day[style*="background:transparent"]{
+  background:transparent !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+}
+
+/* Eventos dentro do dia atual continuam legíveis */
+.cal-day.today .cal-event{
+  border:1px solid rgba(255,255,255,.55);
+  font-weight:800;
+}
+
 </style>
 <base target="_self">
 </head>
@@ -274,7 +324,7 @@ a.btn{
 <div class="nav-item" data-page="budgets" onclick="nav('budgets')"><svg viewBox="0 0 24 24" fill="none"><path d="M15.5 15.5c.5 0 .9.4.9.9s-.4.9-.9.9H8.5c-.5 0-.9-.4-.9-.9s.4-.9.9-.9h7zM12.3 11.1c.5 0 .9.4.9.9s-.4.9-.9.9H8.5c-.5 0-.9-.4-.9-.9s.4-.9.9-.9h3.8z" fill="currentColor"/></svg><span>Orçamentos</span></div>
 <div class="nav-item" data-page="invoices" onclick="nav('invoices')"><svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M14.6 3.1c1 0 2 .4 2.7 1.1l2.4 2.3c.8.7 1.2 1.8 1.2 2.8v7.7c0 2.2-1.7 3.9-3.9 3.9H7c-2.2 0-3.9-1.7-3.9-3.9V7c0-2.2 1.7-3.9 3.9-3.9h7.6zM7 4.9c-1.2 0-2.1 1-2.1 2.1v10c0 1.2 1 2.1 2.1 2.1h10c1.2 0 2.1-1 2.1-2.1V9.3c0-.8-.3-1.5-.8-2l-2.4-2.3c-.4-.4-1-.7-1.6-.7H7z" fill="currentColor"/></svg><span>Notas fiscais</span></div>
 <div class="nav-item" data-page="clients" onclick="nav('clients')"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12.9c4 0 7.4 2.5 8.7 6 .4 1-.3 2-1.2 2.1l-.2.1H4.5l-.2-.1c-.9-.1-1.5-1.1-1.2-2.1 1.3-3.5 4.7-6 8.7-6zm.2-9.9c2.4.1 4.3 2.1 4.3 4.5s-1.9 4.3-4.3 4.5c-2.4-.1-4.3-2.1-4.3-4.5s1.9-4.3 4.3-4.5z" fill="currentColor"/></svg><span>Clientes</span></div>
-<div class="nav-item" data-page="suppliers" onclick="nav('suppliers')"><svg viewBox="0 0 24 24" fill="none"><path d="M9.2 3.7c1.2 0 2.3.5 3 1.3l.2.3h5.6c2.1 0 3.8 1.7 3.8 3.8v7.3c0 2.1-1.7 3.8-3.8 3.8H6c-2.1 0-3.8-1.7-3.8-3.8V7.5c0-2.1 1.7-3.8 3.8-3.8h3.2zM6 5.5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V9.2c0-.5-.2-1-.5-1.3l-.1-.1H6z" fill="currentColor"/></svg><span>Fornecedores</span></div>
+<div class="nav-item" data-page="suppliers" onclick="nav('suppliers')"><svg viewBox="0 0 24 24" fill="none"><path d="M9.2 3.7c1.2 0 2.3.5 3 1.3l.2.3h5.6c2.1 0 3.8 1.7 3.8 3.8v7.3c0 2.1-1.7 3.8-3.8 3.8H6c-2.1 0-3.8-1.7-3.8-3.8V7.5c0-2.1 1.7-3.8 3.8-3.8h3.2zM6 5.5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V9.2c0-.5-.2-1-.5-1.3l-.1-.1H6z" fill="currentColor"/></svg><span>Contas a pagar</span></div>
 <div class="nav-item" data-page="calendar" onclick="nav('calendar')"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.1c5.5 0 9.9 4.4 9.9 9.9s-4.4 9.9-9.9 9.9S2.1 17.5 2.1 12 6.5 2.1 12 2.1zm0 1.8c-4.5 0-8.1 3.6-8.1 8.1s3.6 8.1 8.1 8.1 8.1-3.6 8.1-8.1S16.5 3.9 12 3.9zm.9 3.6v4.5l3.2 1.9c.4.2.5.8.3 1.1-.2.4-.8.5-1.1.3l-3.5-2.1c-.2-.2-.4-.5-.4-.8V7.5c0-.5.4-.9.9-.9s.7.4.7.9z" fill="currentColor"/></svg><span>Agenda</span></div>
 <div class="nav-item" data-page="documents" onclick="nav('documents')"><svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M14.6 3.1c1 0 2 .4 2.7 1.1l2.4 2.3c.8.7 1.2 1.8 1.2 2.8v7.7c0 2.2-1.7 3.9-3.9 3.9H7c-2.2 0-3.9-1.7-3.9-3.9V7c0-2.2 1.7-3.9 3.9-3.9h7.6zM7 4.9c-1.2 0-2.1 1-2.1 2.1v10c0 1.2 1 2.1 2.1 2.1h10c1.2 0 2.1-1 2.1-2.1V9.3c0-.8-.3-1.5-.8-2l-2.4-2.3c-.4-.4-1-.7-1.6-.7H7z" fill="currentColor"/></svg><span>Documentos</span></div>
 <div class="nav-item" data-page="reports" onclick="nav('reports')"><svg viewBox="0 0 24 24" fill="none"><path d="M15.5 15.5c.5 0 .9.4.9.9s-.4.9-.9.9H8.5c-.5 0-.9-.4-.9-.9s.4-.9.9-.9h7zM12.3 11.1c.5 0 .9.4.9.9s-.4.9-.9.9H8.5c-.5 0-.9-.4-.9-.9s.4-.9.9-.9h3.8z" fill="currentColor"/></svg><span>Relatórios</span></div>
@@ -380,6 +430,59 @@ const sl=(s,t)=>{const m={budget:{pending:'Pendente',approved:'Aprovado',rejecte
 const txLabel=t=>({income:'Ganho',expense:'Gasto',receivable:'A receber'}[t]||t);
 const txSign=t=>t==='income'?'+':t==='expense'?'-':'↗';
 
+const budgetSubtotal=b=>{const v=Number(b?.subtotal);return Number.isFinite(v)&&v>=0?v:Number(b?.amount)||0};
+const budgetExpenses=b=>{const v=Number(b?.expenses);return Number.isFinite(v)&&v>=0?v:0};
+const budgetDiscount=b=>{const v=Number(b?.discount);return Number.isFinite(v)&&v>=0?v:0};
+const budgetTotal=b=>Math.max(budgetSubtotal(b)+budgetExpenses(b)-budgetDiscount(b),0);
+const budgetNumber=b=>{
+  if(b?.number)return String(b.number).padStart(4,'0');
+  const pos=data.budgets.findIndex(x=>x.id===b?.id);
+  return String(pos>=0?pos+1:data.budgets.length+1).padStart(4,'0');
+};
+function nextBudgetNumber(){
+  const nums=data.budgets.map(b=>parseInt(String(b.number||'').replace(/\D/g,''),10)).filter(Number.isFinite);
+  const next=nums.length?Math.max(...nums)+1:data.budgets.length+1;
+  return String(next).padStart(4,'0');
+}
+function budgetDefaultDueDate(){
+  const d=new Date();d.setDate(d.getDate()+15);
+  return localDateKey(d);
+}
+function parseBudgetItems(text){
+  const raw=String(text||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(!raw.length)return [];
+  return raw.map((line,idx)=>{
+    const parts=line.split('|').map(x=>x.trim());
+    if(parts.length>=4){
+      const qty=Number(String(parts[1]).replace(',','.'))||1;
+      const unit=parts[2]||'Serviço';
+      const unitValue=Number(String(parts[3]).replace(/\./g,'').replace(',','.'));
+      return {description:parts[0]||`Serviço ${idx+1}`,qty,unit,unitValue:Number.isFinite(unitValue)?unitValue:null};
+    }
+    return {description:line,qty:1,unit:'Serviço',unitValue:null};
+  });
+}
+function budgetHtmlEsc(v){
+  return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+}
+function updateBudgetTotalPreview(){
+  const subtotal=parseFloat(document.getElementById('bg-subtotal')?.value)||0;
+  const expenses=parseFloat(document.getElementById('bg-expenses')?.value)||0;
+  const discount=parseFloat(document.getElementById('bg-discount')?.value)||0;
+  const total=Math.max(subtotal+expenses-discount,0);
+  const el=document.getElementById('bg-total-preview');
+  if(el)el.textContent=fm(total);
+}
+
+
+const payableTotal=p=>{const v=Number(p?.totalAmount);if(Number.isFinite(v)&&v>=0)return v;const legacy=Number(p?.balance);return Number.isFinite(legacy)&&legacy>=0?legacy:0};
+const payablePaid=p=>{const v=Number(p?.paidAmount);return Number.isFinite(v)&&v>=0?Math.min(v,payableTotal(p)):0};
+const payableRemaining=p=>Math.max(payableTotal(p)-payablePaid(p),0);
+const payableStatus=p=>{const total=payableTotal(p),paid=payablePaid(p),remaining=payableRemaining(p);if(total>0&&remaining<=0)return 'paid';if(paid>0)return 'partial';return 'pending'};
+const payableStatusLabel=p=>({paid:'Pago',partial:'Parcial',pending:'Pendente'}[payableStatus(p)]);
+const payableCategoryLabel=c=>({employee:'Funcionário / Diária',tax:'Imposto / Tributo',supplier:'Fornecedor / Material',service:'Serviço',rent:'Aluguel',utility:'Conta fixa',other:'Outro'}[c]||c||'Outro');
+
+
 function nav(p){page=p;cview=null;document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.page===p));render()}
 function render(){const m=document.getElementById('main');if(page==='dashboard')rd(m);else if(page==='transactions')rt(m);else if(page==='budgets')rb(m);else if(page==='invoices')ri(m);else if(page==='clients')rc(m);else if(page==='suppliers')rs(m);else if(page==='calendar')rl(m);else if(page==='documents')rdoc(m);else if(page==='reports')rr(m)}
 
@@ -396,7 +499,7 @@ const te=data.transactions.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amoun
 const tr=data.transactions.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
 const bal=data.companyBalance+ti-te;const pb=data.budgets.filter(b=>b.status==='pending').length;
 const ti2=data.invoices.length,pi=data.invoices.filter(i=>i.status==='paid').length;
-const nc=data.clients.length,ns=data.suppliers.length;
+const nc=data.clients.length,ns=data.suppliers.length,totalPayable=data.suppliers.reduce((s,p)=>s+payableRemaining(p),0);
 const ne=data.events.filter(e=>e.date>=new Date().toISOString().split('T')[0]).length;
 const total=ti+te,incomePerc=total>0?Math.round((ti/total)*100):0;
 const mo=getMonthly();const mv=Math.max(...mo.map(m=>Math.max(m.income,m.expense)),1);
@@ -442,7 +545,7 @@ ${pieChart}
 </div>
 <div class="chart-container"><div class="chart-title">Evolução mensal</div><svg class="chart-svg" viewBox="0 0 ${cw} ${ch}">${gs}${bs}</svg><div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--success)"></div>Ganhos</div><div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div>Gastos</div></div></div>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px">
-<div class="card"><div class="card-label">Clientes</div><div class="card-value">${nc}</div></div><div class="card"><div class="card-label">Fornecedores</div><div class="card-value">${ns}</div></div><div class="card"><div class="card-label">Eventos pendentes</div><div class="card-value">${ne}</div></div><div class="card"><div class="card-label">Orçamentos pendentes</div><div class="card-value">${pb}</div></div><div class="card"><div class="card-label">NFs emitidas</div><div class="card-value">${ti2}</div></div><div class="card"><div class="card-label">NFs pagas</div><div class="card-value">${pi}</div></div>
+<div class="card"><div class="card-label">Clientes</div><div class="card-value">${nc}</div></div><div class="card"><div class="card-label">Contas a pagar</div><div class="card-value" style="font-size:22px">${fm(totalPayable)}</div><div style="font-size:11px;color:var(--muted);margin-top:4px">${ns} registro(s)</div></div><div class="card"><div class="card-label">Eventos pendentes</div><div class="card-value">${ne}</div></div><div class="card"><div class="card-label">Orçamentos pendentes</div><div class="card-value">${pb}</div></div><div class="card"><div class="card-label">NFs emitidas</div><div class="card-value">${ti2}</div></div><div class="card"><div class="card-label">NFs pagas</div><div class="card-value">${pi}</div></div>
 </div>
 <div class="three-col"><div class="table-wrap"><div style="padding:12px 14px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:linear-gradient(180deg,#f8fbff 0%,#f4f8ff 100%)">Últimos ganhos</div>${li.map(t=>`<div style="padding:10px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px"><div><div style="font-weight:700">${t.desc}</div><div style="font-size:10px;color:var(--muted)">${t.client||'—'}</div></div><div style="font-weight:800;color:var(--success)">${fm(t.amount)}</div></div>`).join('')||'<div class="empty-state">Nenhum</div>'}</div><div class="table-wrap"><div style="padding:12px 14px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:linear-gradient(180deg,#f8fbff 0%,#f4f8ff 100%)">Orçamentos</div>${lb.map(b=>`<div style="padding:10px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px"><div><div style="font-weight:700">${b.client}</div><div style="font-size:10px;color:var(--muted)">${b.desc}</div></div><span class="badge b${b.status[0]}">${sl(b.status,'budget')}</span></div>`).join('')||'<div class="empty-state">Nenhum</div>'}</div><div class="table-wrap"><div style="padding:12px 14px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:linear-gradient(180deg,#f8fbff 0%,#f4f8ff 100%)">Próximos eventos</div>${le.map(e=>`<div style="padding:10px 12px;border-bottom:1px solid var(--border);font-size:12px"><div style="font-weight:700">${e.title}</div><div style="font-size:10px;color:var(--muted);">${fd(e.date)} ${e.time} — ${sl(e.type,'event')}</div></div>`).join('')||'<div class="empty-state">Nenhum</div>'}</div></div>`;
 }
@@ -473,15 +576,120 @@ function delTx(id){if(confirm('Excluir?')){data.transactions=data.transactions.f
 
 function rb(c){
 const fb=document.getElementById('bgf')?.value||'all',sq=document.getElementById('bgs')?.value||'';
-let list=data.budgets.slice().sort((a,b)=>b.date.localeCompare(a.date));
-if(fb!=='all')list=list.filter(b=>b.status===fb);if(sq)list=list.filter(b=>b.client.toLowerCase().includes(sq.toLowerCase())||b.desc.toLowerCase().includes(sq.toLowerCase()));
-c.innerHTML=`<div class="header"><h2>Orçamentos</h2><button class="btn btn-primary" onclick="openBg()">+ Novo</button></div>
-<div class="filters"><select id="bgf" onchange="render()"><option value="all">Todos</option><option value="pending">Pendente</option><option value="approved">Aprovado</option><option value="rejected">Rejeitado</option><option value="completed">Concluído</option></select><input type="text" id="bgs" placeholder="Buscar..." oninput="render()" value="${sq}"></div>
-<div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Cliente</th><th>Descrição</th><th style="text-align:right">Valor</th><th>Status</th><th style="width:70px"></th></tr></thead><tbody>${list.length?list.map(b=>`<tr><td>${fd(b.date)}</td><td style="font-weight:500">${b.client}</td><td>${b.desc}</td><td style="text-align:right" class="amount">${fm(b.amount)}</td><td><span class="badge b${b.status[0]}">${sl(b.status,'budget')}</span></td><td><div class="row-actions"><button class="icon-btn" onclick="editBg('${b.id}')"><svg viewBox="0 0 24 24" fill="none"><path d="M18 3.1c.4 0 .8.1 1.1.2.4.1.7.4 1 .6.3.3.5.6.6 1 .2.4.2.7.2 1.1 0 .4-.1.7-.2 1.1-.1.4-.4.7-.6 1l-2.4 2.4-8.5 8.5c-.6.6-1.4 1.1-2.3 1.3l-2.7.7c-.3.1-.6 0-.9-.3-.2-.2-.3-.5-.2-.9l.7-2.7c.2-.9.6-1.6 1.3-2.3l8.5-8.5 2.4-2.4c.3-.3.6-.5 1-.6.3-.2.7-.2 1.1-.2zm-4.5 5.1-7.1 7.1c-.4.4-.6.8-.8 1.3l-.4 1.1 1.1-.4c.5-.2.9-.4 1.3-.8l7.1-7.1-1.1-1.1zm2.8-2.8-1.6 1.6 1.1 1.1 1.6-1.6c.2-.2.2-.4 0-.6-.2-.2-.4-.2-.6 0l-.4-.4z" fill="currentColor"/></svg></button><button class="icon-btn" onclick="delBg('${b.id}')"><svg viewBox="0 0 24 24" fill="none"><path d="M8.1 3c0-.5.4-.9.9-.9h6c.5 0 .9.4.9.9s-.4.9-.9.9H9c-.5 0-.9-.4-.9-.9zM10 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9zM14 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9z" fill="currentColor"/><path fill-rule="evenodd" d="M5 5.9c.5 0 .9.4.9.9V18c0 .5.4.9.9.9h10.4c.5 0 .9-.4.9-.9V6.8c0-.5.4-.9.9-.9s.9.4.9.9V18c0 1.5-1.2 2.7-2.7 2.7H6.8C5.3 20.7 4.1 19.5 4.1 18V6.8c0-.5.4-.9.9-.9z" fill="currentColor"/></svg></button></div></td></tr>`).join(''):`<tr><td colspan="6"><div class="empty-state">Nenhum orçamento</div></td></tr>`}</tbody></table></div>`;
+let list=data.budgets.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+if(fb!=='all')list=list.filter(b=>b.status===fb);
+if(sq){
+  const q=sq.toLowerCase();
+  list=list.filter(b=>(b.client||'').toLowerCase().includes(q)||(b.desc||'').toLowerCase().includes(q)||budgetNumber(b).includes(q));
 }
-function openBg(id){etype='bg';eid=id||null;const b=id?data.budgets.find(x=>x.id===id):{};document.getElementById('modal-title').textContent=id?'Editar':'Novo orçamento';document.getElementById('modal-body').innerHTML=`<div class="form-row"><div class="form-group"><label>Cliente</label><select id="bg-client">${data.clients.map(c=>`<option value="${c.name}" ${b.client===c.name?'selected':''}>${c.name}</option>`).join('')}</select></div><div class="form-group"><label>Valor</label><input type="number" step="0.01" id="bg-amount" value="${b.amount||''}"></div></div><div class="form-group"><label>Descrição</label><input type="text" id="bg-desc" value="${b.desc||''}"></div><div class="form-group"><label>Itens</label><textarea id="bg-items">${b.items||''}</textarea></div><div class="form-row"><div class="form-group"><label>Status</label><select id="bg-status"><option value="pending" ${b.status==='pending'?'selected':''}>Pendente</option><option value="approved" ${b.status==='approved'?'selected':''}>Aprovado</option><option value="rejected" ${b.status==='rejected'?'selected':''}>Rejeitado</option><option value="completed" ${b.status==='completed'?'selected':''}>Concluído</option></select></div><div class="form-group"><label>Data</label><input type="date" id="bg-date" value="${b.date||new Date().toISOString().split('T')[0]}"></div></div>`;const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';}}
+c.innerHTML=`<div class="header"><div><h2>Orçamentos</h2><span style="font-size:12px;color:var(--muted);font-weight:800">Cadastre e gere uma versão profissional para o cliente</span></div><button class="btn btn-primary" onclick="openBg()">+ Novo orçamento</button></div>
+<div class="filters"><select id="bgf" onchange="render()"><option value="all" ${fb==='all'?'selected':''}>Todos</option><option value="pending" ${fb==='pending'?'selected':''}>Pendente</option><option value="approved" ${fb==='approved'?'selected':''}>Aprovado</option><option value="rejected" ${fb==='rejected'?'selected':''}>Rejeitado</option><option value="completed" ${fb==='completed'?'selected':''}>Concluído</option></select><input type="text" id="bgs" placeholder="Buscar cliente, serviço ou nº..." oninput="render()" value="${sq}" style="flex:1;min-width:220px"></div>
+<div class="table-wrap"><table class="table"><thead><tr><th>Nº</th><th>Emissão</th><th>Cliente</th><th>Descrição</th><th style="text-align:right">Total</th><th>Status</th><th style="width:190px"></th></tr></thead><tbody>${list.length?list.map(b=>`<tr><td style="font-weight:900">#${budgetNumber(b)}</td><td>${fd(b.date)}</td><td style="font-weight:700">${b.client}</td><td>${b.desc}</td><td style="text-align:right" class="amount">${fm(budgetTotal(b))}</td><td><span class="badge b${b.status[0]}">${sl(b.status,'budget')}</span></td><td><div class="row-actions" style="opacity:1;justify-content:flex-end"><button class="btn btn-sm" onclick="printBudget('${b.id}')">PDF / Imprimir</button><button class="icon-btn" onclick="editBg('${b.id}')" title="Editar"><svg viewBox="0 0 24 24" fill="none"><path d="M18 3.1c.4 0 .8.1 1.1.2.4.1.7.4 1 .6.3.3.5.6.6 1 .2.4.2.7.2 1.1 0 .4-.1.7-.2 1.1-.1.4-.4.7-.6 1l-2.4 2.4-8.5 8.5c-.6.6-1.4 1.1-2.3 1.3l-2.7.7c-.3.1-.6 0-.9-.3-.2-.2-.3-.5-.2-.9l.7-2.7c.2-.9.6-1.6 1.3-2.3l8.5-8.5 2.4-2.4c.3-.3.6-.5 1-.6.3-.2.7-.2 1.1-.2zm-4.5 5.1-7.1 7.1c-.4.4-.6.8-.8 1.3l-.4 1.1 1.1-.4c.5-.2.9-.4 1.3-.8l7.1-7.1-1.1-1.1zm2.8-2.8-1.6 1.6 1.1 1.1 1.6-1.6c.2-.2.2-.4 0-.6-.2-.2-.4-.2-.6 0l-.4-.4z" fill="currentColor"/></svg></button><button class="icon-btn" onclick="delBg('${b.id}')" title="Excluir"><svg viewBox="0 0 24 24" fill="none"><path d="M8.1 3c0-.5.4-.9.9-.9h6c.5 0 .9.4.9.9s-.4.9-.9.9H9c-.5 0-.9-.4-.9-.9zM10 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9zM14 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9z" fill="currentColor"/><path fill-rule="evenodd" d="M5 5.9c.5 0 .9.4.9.9V18c0 .5.4.9.9.9h10.4c.5 0 .9-.4.9-.9V6.8c0-.5.4-.9.9-.9s.9.4.9.9V18c0 1.5-1.2 2.7-2.7 2.7H6.8C5.3 20.7 4.1 19.5 4.1 18V6.8c0-.5.4-.9.9-.9z" fill="currentColor"/></svg></button></div></td></tr>`).join(''):`<tr><td colspan="7"><div class="empty-state">Nenhum orçamento</div></td></tr>`}</tbody></table></div>`;
+}
+
+function openBg(id){
+etype='bg';eid=id||null;
+const b=id?data.budgets.find(x=>x.id===id):{};
+const subtotal=budgetSubtotal(b),expenses=budgetExpenses(b),discount=budgetDiscount(b);
+document.getElementById('modal-title').textContent=id?'Editar orçamento':'Novo orçamento';
+document.getElementById('modal-body').innerHTML=`
+<div class="form-row">
+  <div class="form-group"><label>Número do orçamento</label><input type="text" id="bg-number" value="${budgetHtmlEsc(id?budgetNumber(b):nextBudgetNumber())}" placeholder="0001"></div>
+  <div class="form-group"><label>Cliente</label><select id="bg-client">${data.clients.map(c=>`<option value="${budgetHtmlEsc(c.name)}" ${b.client===c.name?'selected':''}>${budgetHtmlEsc(c.name)}</option>`).join('')}</select></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Data de emissão</label><input type="date" id="bg-date" value="${b.date||localDateKey(new Date())}"></div>
+  <div class="form-group"><label>Vencimento / validade</label><input type="date" id="bg-due" value="${b.dueDate||budgetDefaultDueDate()}"></div>
+</div>
+<div class="form-group"><label>Título / descrição do orçamento</label><input type="text" id="bg-desc" value="${budgetHtmlEsc(b.desc||'')}" placeholder="Ex: Manutenção corretiva e programação de inversor"></div>
+<div class="form-group"><label>Serviços / itens</label><textarea id="bg-items" style="min-height:120px" placeholder="Uma linha por serviço&#10;Ex: Programação de inversor de frequência&#10;Manutenção corretiva da Lavadora 20kg">${budgetHtmlEsc(b.items||'')}</textarea><div style="font-size:11px;color:var(--muted);margin-top:5px">Opcional: use <b>Descrição | Qtd | Unidade | Valor unitário</b> para detalhar uma linha.</div></div>
+<div class="form-row">
+  <div class="form-group"><label>Valor dos serviços</label><input type="number" min="0" step="0.01" id="bg-subtotal" value="${subtotal||''}" oninput="updateBudgetTotalPreview()"></div>
+  <div class="form-group"><label>Despesas adicionais</label><input type="number" min="0" step="0.01" id="bg-expenses" value="${expenses||''}" oninput="updateBudgetTotalPreview()"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Desconto</label><input type="number" min="0" step="0.01" id="bg-discount" value="${discount||''}" oninput="updateBudgetTotalPreview()"></div>
+  <div class="form-group"><label>Status</label><select id="bg-status"><option value="pending" ${b.status==='pending'?'selected':''}>Pendente</option><option value="approved" ${b.status==='approved'?'selected':''}>Aprovado</option><option value="rejected" ${b.status==='rejected'?'selected':''}>Rejeitado</option><option value="completed" ${b.status==='completed'?'selected':''}>Concluído</option></select></div>
+</div>
+<div style="padding:14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;margin-bottom:14px"><div style="font-size:11px;color:#334155;font-weight:900;text-transform:uppercase">Total do orçamento</div><div id="bg-total-preview" style="font-size:28px;font-weight:900;color:#0f6fff">${fm(Math.max(subtotal+expenses-discount,0))}</div></div>
+<div class="form-group"><label>Condições de pagamento</label><input type="text" id="bg-payment" value="${budgetHtmlEsc(b.paymentTerms||'PIX OU BOLETO')}" placeholder="Ex: PIX OU BOLETO / 50% entrada + 50% conclusão"></div>
+<div class="form-row">
+  <div class="form-group"><label>Garantia</label><input type="text" id="bg-warranty" value="${budgetHtmlEsc(b.warranty||'')}" placeholder="Ex: 90 dias para o serviço executado"></div>
+  <div class="form-group"><label>Responsável / contato</label><input type="text" id="bg-contact" value="${budgetHtmlEsc(b.contact||'Pedro Henrique Lima')}" placeholder="Nome do responsável"></div>
+</div>
+<div class="form-group"><label>Observações</label><textarea id="bg-notes" placeholder="Informações adicionais para o cliente">${budgetHtmlEsc(b.notes||'')}</textarea></div>`;
+const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';}
+}
+
 function editBg(id){openBg(id)}
-function delBg(id){if(confirm('Excluir?')){data.budgets=data.budgets.filter(b=>b.id!==id);sd();render()}}
+function delBg(id){if(confirm('Excluir orçamento?')){data.budgets=data.budgets.filter(b=>b.id!==id);sd();render()}}
+
+function printBudget(id){
+const b=data.budgets.find(x=>x.id===id);if(!b)return;
+const cl=data.clients.find(c=>c.name===b.client)||{};
+const subtotal=budgetSubtotal(b),expenses=budgetExpenses(b),discount=budgetDiscount(b),total=budgetTotal(b);
+const items=parseBudgetItems(b.items||b.desc||'Serviço');
+const rows=(items.length?items:[{description:b.desc||'Serviço',qty:1,unit:'Serviço',unitValue:null}]).map((it,idx)=>{
+  const unitVal=it.unitValue;
+  const lineTotal=unitVal!=null?it.qty*unitVal:null;
+  return `<tr><td><span class="item-num">${String(idx+1).padStart(2,'0')}</span>${budgetHtmlEsc(it.description)}</td><td class="center">${budgetHtmlEsc(it.qty)}</td><td class="center">${budgetHtmlEsc(it.unit)}</td><td class="money">${unitVal!=null?fm(unitVal):'—'}</td><td class="money">${lineTotal!=null?fm(lineTotal):'—'}</td></tr>`;
+}).join('');
+
+const printHtml=`<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><title>Orçamento ${budgetHtmlEsc(budgetNumber(b))} - ${budgetHtmlEsc(b.client)}</title>
+<style>
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#e9eef5;font-family:Arial,Helvetica,sans-serif;color:#0f172a;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:center;gap:10px;padding:12px;background:#0f172a}
+.toolbar button{border:0;border-radius:10px;background:#0f6fff;color:#fff;padding:10px 18px;font-weight:800;cursor:pointer}
+.page{width:210mm;min-height:297mm;margin:18px auto;background:#fff;padding:15mm 16mm 14mm;box-shadow:0 18px 60px rgba(15,23,42,.18)}
+.top{display:flex;justify-content:space-between;gap:22px;align-items:flex-start;border-bottom:2px solid #e2e8f0;padding-bottom:15px}
+.brand{display:flex;gap:13px;align-items:center}
+.logo{width:58px;height:58px;border-radius:16px;background:linear-gradient(145deg,#0f6fff,#0847a6);display:grid;place-items:center;color:#fff;font-size:20px;font-weight:900;letter-spacing:.08em}
+.brand h1{font-size:17px;margin:0 0 4px;color:#07101f}.brand p,.contact p{margin:2px 0;font-size:10.5px;color:#475569;line-height:1.35}
+.contact{text-align:right}.contact strong{color:#0f6fff}
+.hero{margin-top:18px;border-radius:16px;padding:17px 19px;background:linear-gradient(135deg,#0f6fff,#0847a6);color:white;display:flex;align-items:center;justify-content:space-between}
+.hero small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.13em;opacity:.78;margin-bottom:4px}.hero h2{margin:0;font-size:25px;letter-spacing:-.02em}.hero .number{text-align:right;font-size:22px;font-weight:900}
+.grid{display:grid;grid-template-columns:1.45fr .75fr;gap:12px;margin-top:14px}.card{border:1px solid #dbe4ef;border-radius:14px;padding:13px 15px;background:#fbfdff}.card-title{font-size:9.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#0f6fff;margin-bottom:8px}.client-name{font-size:15px;font-weight:900;margin-bottom:5px}.info{font-size:10.5px;color:#475569;line-height:1.5}.dates{display:grid;grid-template-columns:1fr;gap:8px}.date-row{display:flex;justify-content:space-between;gap:12px;font-size:10.5px}.date-row span:first-child{color:#64748b}.date-row strong{color:#0f172a}
+.section-title{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#334155;margin:18px 0 7px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:10px;border:1px solid #dbe4ef;border-radius:12px;overflow:hidden}th{background:#eff6ff;color:#1e3a8a;font-size:9px;text-transform:uppercase;letter-spacing:.04em;padding:9px 8px;text-align:left}td{padding:10px 8px;border-top:1px solid #e5eaf1;vertical-align:top}.center{text-align:center}.money{text-align:right;white-space:nowrap;font-weight:700}.item-num{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:7px;background:#e8f1ff;color:#0f6fff;font-weight:900;margin-right:7px}
+.summary-wrap{display:flex;justify-content:flex-end;margin-top:14px}.summary{width:49%;border:1px solid #dbe4ef;border-radius:14px;padding:12px 14px}.sum-row{display:flex;justify-content:space-between;font-size:10.5px;padding:5px 0;color:#475569}.sum-row strong{color:#0f172a}.sum-total{margin-top:5px;padding-top:10px;border-top:2px solid #dbe4ef;font-size:15px;font-weight:900;color:#07101f}.sum-total strong{color:#0f6fff}
+.notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.note{border:1px solid #dbe4ef;border-radius:13px;padding:11px 13px;min-height:67px}.note strong{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:#0f6fff}.note p{font-size:10.5px;color:#475569;line-height:1.5;margin:6px 0 0;white-space:pre-wrap}
+.footer{margin-top:22px;padding-top:11px;border-top:1px solid #dbe4ef;display:flex;justify-content:space-between;font-size:9px;color:#64748b}.footer strong{color:#334155}
+@media print{html,body{background:#fff}.toolbar{display:none}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+</style></head><body>
+<div class="toolbar"><button onclick="window.print()">Imprimir / Salvar como PDF</button><button onclick="window.close()">Fechar</button></div>
+<main class="page">
+  <div class="top">
+    <div class="brand"><div class="logo">PHL</div><div><h1>PHL Automação Industrial LTDA</h1><p>CNPJ: 64.004.208/0001-61</p><p>Rua Socorro, 13 - Jardins Polvilho</p><p>07793-195 - Cajamar - SP</p></div></div>
+    <div class="contact"><p><strong>phlmanut@gmail.com</strong></p><p>Tel.: (11) 93495-1701</p><p>${budgetHtmlEsc(b.contact||'Pedro Henrique Lima')}</p></div>
+  </div>
+  <div class="hero"><div><small>Proposta comercial</small><h2>${budgetHtmlEsc(b.desc||'Orçamento de serviços')}</h2></div><div class="number"><small>Orçamento</small>#${budgetHtmlEsc(budgetNumber(b))}</div></div>
+  <div class="grid">
+    <div class="card"><div class="card-title">Dados do cliente</div><div class="client-name">${budgetHtmlEsc(cl.name||b.client)}</div><div class="info">${cl.cnpj?`CNPJ: ${budgetHtmlEsc(cl.cnpj)}<br>`:''}${cl.phone?`Telefone: ${budgetHtmlEsc(cl.phone)}<br>`:''}${cl.email?`E-mail: ${budgetHtmlEsc(cl.email)}<br>`:''}${cl.address?budgetHtmlEsc(cl.address):''}</div></div>
+    <div class="card"><div class="card-title">Datas</div><div class="dates"><div class="date-row"><span>Emissão</span><strong>${fd(b.date)}</strong></div><div class="date-row"><span>Vencimento / validade</span><strong>${fd(b.dueDate||'')}</strong></div><div class="date-row"><span>Status</span><strong>${budgetHtmlEsc(sl(b.status,'budget'))}</strong></div></div></div>
+  </div>
+  <div class="section-title">Serviços</div>
+  <table><thead><tr><th>Descrição</th><th class="center">Qtd.</th><th class="center">Unidade</th><th style="text-align:right">Valor unit.</th><th style="text-align:right">Valor total</th></tr></thead><tbody>${rows}</tbody></table>
+  <div class="summary-wrap"><div class="summary">
+    <div class="sum-row"><span>Serviços</span><strong>${fm(subtotal)}</strong></div>
+    <div class="sum-row"><span>Despesas</span><strong>${expenses?fm(expenses):'R$ 0,00'}</strong></div>
+    <div class="sum-row"><span>Desconto</span><strong>${discount?'- '+fm(discount):'R$ 0,00'}</strong></div>
+    <div class="sum-row sum-total"><span>Total orçamento</span><strong>${fm(total)}</strong></div>
+  </div></div>
+  <div class="notes-grid">
+    <div class="note"><strong>Condições de pagamento</strong><p>${budgetHtmlEsc(b.paymentTerms||'PIX OU BOLETO')}</p></div>
+    <div class="note"><strong>Garantia</strong><p>${budgetHtmlEsc(b.warranty||'Conforme condições do serviço executado.')}</p></div>
+  </div>
+  ${b.notes?`<div class="note" style="margin-top:12px"><strong>Observações</strong><p>${budgetHtmlEsc(b.notes)}</p></div>`:''}
+  <div class="footer"><span>PHL Manutenção e Automação</span><span><strong>Orçamento #${budgetHtmlEsc(budgetNumber(b))}</strong> • ${fd(b.date)}</span></div>
+</main></body></html>`;
+
+const w=window.open('','_blank');
+if(!w){alert('O navegador bloqueou a visualização do orçamento. Permita pop-ups para este site e tente novamente.');return}
+w.document.open();w.document.write(printHtml);w.document.close();w.focus();
+}
 
 function ri(c){
 const fi=document.getElementById('inf')?.value||'all',sq=document.getElementById('ins')?.value||'';
@@ -527,17 +735,29 @@ function delCl(id){if(confirm('Excluir cliente? Isso não remove transações vi
 
 function rs(c){
 const sq=document.getElementById('ss')?.value||'';
-let list=data.suppliers.slice().sort((a,b)=>a.name.localeCompare(b.name));
-if(sq)list=list.filter(s=>s.name.toLowerCase().includes(sq.toLowerCase())||s.category.toLowerCase().includes(sq.toLowerCase()));
-const tb=list.reduce((s,x)=>s+x.balance,0);
-c.innerHTML=`<div class="header"><h2>Fornecedores</h2><button class="btn btn-primary" onclick="openSp()">+ Novo</button></div>
-<div class="filters"><input type="text" id="ss" placeholder="Buscar fornecedor..." oninput="render()" value="${sq}" style="flex:1;max-width:300px"></div>
-<div class="totals-bar"><span>Total a pagar:<b style="color:var(--danger)">${fm(tb)}</b></span><span>Fornecedores:<b>${list.length}</b></span></div>
-<div class="table-wrap"><table class="table"><thead><tr><th>Nome</th><th>Categoria</th><th>Telefone</th><th style="text-align:right">Saldo devedor</th><th style="width:70px"></th></tr></thead><tbody>${list.length?list.map(s=>`<tr><td style="font-weight:500">${s.name}</td><td>${s.category}</td><td>${s.phone}</td><td style="text-align:right" class="amount cv-n">${fm(s.balance)}</td><td><div class="row-actions"><button class="icon-btn" onclick="editSp('${s.id}')"><svg viewBox="0 0 24 24" fill="none"><path d="M18 3.1c.4 0 .8.1 1.1.2.4.1.7.4 1 .6.3.3.5.6.6 1 .2.4.2.7.2 1.1 0 .4-.1.7-.2 1.1-.1.4-.4.7-.6 1l-2.4 2.4-8.5 8.5c-.6.6-1.4 1.1-2.3 1.3l-2.7.7c-.3.1-.6 0-.9-.3-.2-.2-.3-.5-.2-.9l.7-2.7c.2-.9.6-1.6 1.3-2.3l8.5-8.5 2.4-2.4c.3-.3.6-.5 1-.6.3-.2.7-.2 1.1-.2zm-4.5 5.1-7.1 7.1c-.4.4-.6.8-.8 1.3l-.4 1.1 1.1-.4c.5-.2.9-.4 1.3-.8l7.1-7.1-1.1-1.1zm2.8-2.8-1.6 1.6 1.1 1.1 1.6-1.6c.2-.2.2-.4 0-.6-.2-.2-.4-.2-.6 0l-.4-.4z" fill="currentColor"/></svg></button><button class="icon-btn" onclick="delSp('${s.id}')"><svg viewBox="0 0 24 24" fill="none"><path d="M8.1 3c0-.5.4-.9.9-.9h6c.5 0 .9.4.9.9s-.4.9-.9.9H9c-.5 0-.9-.4-.9-.9zM10 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9zM14 15.9c-.5 0-.9-.4-.9-.9V10c0-.5.4-.9.9-.9s.9.4.9.9v5c0 .5-.4.9-.9.9z" fill="currentColor"/><path fill-rule="evenodd" d="M5 5.9c.5 0 .9.4.9.9V18c0 .5.4.9.9.9h10.4c.5 0 .9-.4.9-.9V6.8c0-.5.4-.9.9-.9s.9.4.9.9V18c0 1.5-1.2 2.7-2.7 2.7H6.8C5.3 20.7 4.1 19.5 4.1 18V6.8c0-.5.4-.9.9-.9z" fill="currentColor"/></svg></button></div></td></tr>`).join(''):`<tr><td colspan="5"><div class="empty-state">Nenhum fornecedor</div></td></tr>`}</tbody></table></div>`;
+const statusFilter=document.getElementById('spf')?.value||'open';
+let list=data.suppliers.slice().sort((a,b)=>{const da=a.dueDate||'9999-12-31',db=b.dueDate||'9999-12-31';return da.localeCompare(db)||(a.name||'').localeCompare(b.name||'')});
+if(sq){const q=sq.toLowerCase();list=list.filter(p=>(p.name||'').toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q)||payableCategoryLabel(p.category).toLowerCase().includes(q))}
+if(statusFilter==='open')list=list.filter(p=>payableRemaining(p)>0);
+else if(statusFilter==='pending')list=list.filter(p=>payableStatus(p)==='pending');
+else if(statusFilter==='partial')list=list.filter(p=>payableStatus(p)==='partial');
+else if(statusFilter==='paid')list=list.filter(p=>payableStatus(p)==='paid');
+const total=list.reduce((s,p)=>s+payableTotal(p),0),paid=list.reduce((s,p)=>s+payablePaid(p),0),remaining=list.reduce((s,p)=>s+payableRemaining(p),0);
+const overdue=list.filter(p=>p.dueDate&&p.dueDate<localDateKey(new Date())&&payableRemaining(p)>0).length;
+c.innerHTML=`<div class="header"><div><h2>Contas a pagar</h2><span style="font-size:12px;color:var(--muted);font-weight:800">Funcionários, diárias, impostos, fornecedores e outros pagamentos</span></div><button class="btn btn-primary" onclick="openSp()">+ Nova conta</button></div>
+<div class="filters"><select id="spf" onchange="render()"><option value="open" ${statusFilter==='open'?'selected':''}>Em aberto</option><option value="all" ${statusFilter==='all'?'selected':''}>Todas</option><option value="pending" ${statusFilter==='pending'?'selected':''}>Pendentes</option><option value="partial" ${statusFilter==='partial'?'selected':''}>Pagas parcialmente</option><option value="paid" ${statusFilter==='paid'?'selected':''}>Pagas</option></select><input type="text" id="ss" placeholder="Buscar pessoa, imposto, conta..." oninput="render()" value="${sq}" style="flex:1;min-width:220px"></div>
+<div class="totals-bar"><span>Valor total:<b>${fm(total)}</b></span><span>Já pago:<b style="color:var(--success)">${fm(paid)}</b></span><span>Falta pagar:<b style="color:var(--danger)">${fm(remaining)}</b></span><span>Vencidas:<b style="color:var(--danger)">${overdue}</b></span></div>
+<div class="table-wrap"><table class="table"><thead><tr><th>Vencimento</th><th>Quem / Conta</th><th>Tipo</th><th>Descrição</th><th style="text-align:right">Total</th><th style="text-align:right">Pago</th><th style="text-align:right">Falta</th><th>Status</th><th>Ações</th></tr></thead><tbody>${list.length?list.map(p=>{const totalV=payableTotal(p),paidV=payablePaid(p),remainingV=payableRemaining(p),status=payableStatus(p);const overdueNow=p.dueDate&&p.dueDate<localDateKey(new Date())&&remainingV>0;const badge=status==='paid'?'ba':status==='partial'?'bp':'br';return `<tr><td>${p.dueDate?fd(p.dueDate):'—'}${overdueNow?'<div style="font-size:10px;color:var(--danger);font-weight:900">VENCIDA</div>':''}</td><td style="font-weight:800">${p.name||'—'}</td><td>${payableCategoryLabel(p.category)}</td><td>${p.description||p.notes||'—'}</td><td style="text-align:right" class="amount">${fm(totalV)}</td><td style="text-align:right" class="amount">${fm(paidV)}</td><td style="text-align:right" class="amount cv-n">${fm(remainingV)}</td><td><span class="badge ${badge}">${payableStatusLabel(p)}</span></td><td><div style="display:flex;gap:5px;flex-wrap:wrap">${remainingV>0?`<button class="btn btn-sm" onclick="quickPaySp('${p.id}')">Pagar</button>`:''}<button class="btn btn-sm" onclick="editSp('${p.id}')">Editar</button><button class="btn btn-sm" onclick="delSp('${p.id}')">Excluir</button></div></td></tr>`}).join(''):`<tr><td colspan="9"><div class="empty-state">Nenhuma conta a pagar</div></td></tr>`}</tbody></table></div>`;
 }
-function openSp(id){etype='sp';eid=id||null;const s=id?data.suppliers.find(x=>x.id===id):{};document.getElementById('modal-title').textContent=id?'Editar fornecedor':'Novo fornecedor';document.getElementById('modal-body').innerHTML=`<div class="form-row"><div class="form-group"><label>Nome</label><input type="text" id="sp-name" value="${s.name||''}"></div><div class="form-group"><label>CNPJ</label><input type="text" id="sp-cnpj" value="${s.cnpj||''}"></div></div><div class="form-row"><div class="form-group"><label>E-mail</label><input type="email" id="sp-email" value="${s.email||''}"></div><div class="form-group"><label>Telefone</label><input type="text" id="sp-phone" value="${s.phone||''}"></div></div><div class="form-row"><div class="form-group"><label>Categoria</label><input type="text" id="sp-cat" value="${s.category||''}" placeholder="Ex: Material, Serviços, Imóvel"></div><div class="form-group"><label>Saldo devedor (R$)</label><input type="number" step="0.01" id="sp-balance" value="${s.balance||''}"></div></div><div class="form-group"><label>Observações</label><textarea id="sp-notes">${s.notes||''}</textarea></div>`;const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';}}
+function openSp(id){
+etype='sp';eid=id||null;const p=id?data.suppliers.find(x=>x.id===id):{};const total=payableTotal(p),paid=payablePaid(p);
+document.getElementById('modal-title').textContent=id?'Editar conta a pagar':'Nova conta a pagar';
+document.getElementById('modal-body').innerHTML=`<div class="form-row"><div class="form-group"><label>Quem deve receber / Nome da conta</label><input type="text" id="sp-name" value="${p.name||''}" placeholder="Ex: João - diária, DAS, INSS, Fornecedor X"></div><div class="form-group"><label>Tipo</label><select id="sp-cat"><option value="employee" ${p.category==='employee'?'selected':''}>Funcionário / Diária</option><option value="tax" ${p.category==='tax'?'selected':''}>Imposto / Tributo</option><option value="supplier" ${p.category==='supplier'?'selected':''}>Fornecedor / Material</option><option value="service" ${p.category==='service'?'selected':''}>Serviço</option><option value="rent" ${p.category==='rent'?'selected':''}>Aluguel</option><option value="utility" ${p.category==='utility'?'selected':''}>Conta fixa</option><option value="other" ${!['employee','tax','supplier','service','rent','utility'].includes(p.category)?'selected':''}>Outro</option></select></div></div><div class="form-group"><label>Descrição</label><input type="text" id="sp-desc" value="${p.description||''}" placeholder="Ex: Diária de instalação 01/09, imposto do mês, compra de material"></div><div class="form-row"><div class="form-group"><label>Valor total (R$)</label><input type="number" min="0" step="0.01" id="sp-total" value="${total||''}" oninput="updatePayablePreview()"></div><div class="form-group"><label>Valor já pago (R$)</label><input type="number" min="0" step="0.01" id="sp-paid" value="${paid||''}" oninput="updatePayablePreview()"></div></div><div style="padding:13px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;margin-bottom:8px"><div style="font-size:11px;font-weight:900;color:#334155;text-transform:uppercase">Falta pagar</div><div id="sp-preview-remaining" style="font-size:26px;font-weight:900;color:#0f6fff">${fm(Math.max(total-paid,0))}</div></div><div style="font-size:11px;color:var(--muted);margin:0 0 14px">Para pagamentos novos, use o botão <b>Pagar</b> na lista. Ele atualiza o restante e lança o valor automaticamente em Ganhos/Gastos.</div><div class="form-row"><div class="form-group"><label>Vencimento / Data prevista</label><input type="date" id="sp-due" value="${p.dueDate||new Date().toISOString().split('T')[0]}"></div><div class="form-group"><label>Telefone (opcional)</label><input type="text" id="sp-phone" value="${p.phone||''}"></div></div><div class="form-group"><label>Observações</label><textarea id="sp-notes">${p.notes||''}</textarea></div>`;const overlay=document.getElementById('modal-overlay');if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden'}
+}
+function updatePayablePreview(){const total=parseFloat(document.getElementById('sp-total')?.value)||0,paid=parseFloat(document.getElementById('sp-paid')?.value)||0;const el=document.getElementById('sp-preview-remaining');if(el)el.textContent=fm(Math.max(total-paid,0))}
+function quickPaySp(id){const p=data.suppliers.find(x=>x.id===id);if(!p)return;const remaining=payableRemaining(p);if(remaining<=0){alert('Esta conta já está paga.');return}const input=prompt(`Quanto você está pagando agora?\nFalta atualmente: ${fm(remaining)}`,'');if(input===null)return;const value=Number(String(input).replace(',','.'));if(!Number.isFinite(value)||value<=0){alert('Digite um valor válido.');return}if(value>remaining){alert(`O valor não pode ser maior que o restante (${fm(remaining)}).`);return}p.totalAmount=payableTotal(p);p.paidAmount=payablePaid(p)+value;p.balance=payableRemaining(p);data.transactions.push({id:uid(),type:'expense',desc:`Pagamento: ${p.name}${p.description?' — '+p.description:''}`,amount:value,date:localDateKey(new Date()),cat:'Contas a pagar',client:''});sd();render()}
 function editSp(id){openSp(id)}
-function delSp(id){if(confirm('Excluir fornecedor?')){data.suppliers=data.suppliers.filter(s=>s.id!==id);sd();render()}}
+function delSp(id){if(confirm('Excluir esta conta a pagar?')){data.suppliers=data.suppliers.filter(s=>s.id!==id);sd();render()}}
 
 function rl(c){
 const y=calD.getFullYear(),m=calD.getMonth();
@@ -622,7 +842,8 @@ Gastos totais:          ${fm(allExpense)}
 Total a receber:        ${fm(allReceivable)}
 Saldo disponível:       ${fm(allBalance)}
 Clientes cadastrados:   ${data.clients.length}
-Fornecedores:           ${data.suppliers.length}
+Contas a pagar:         ${data.suppliers.filter(p=>payableRemaining(p)>0).length}
+Total ainda a pagar:    ${fm(data.suppliers.reduce((s,p)=>s+payableRemaining(p),0))}
 
 ═══════════════════════════════════════════════════
 Gerado em ${fd(now.toISOString().split('T')[0])} às ${now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
@@ -669,6 +890,7 @@ const rec=tx.filter(t=>t.type==='receivable').reduce((s,t)=>s+t.amount,0);
 const events=data.events.filter(e=>e.date&&e.date>=startKey&&e.date<=endKey).sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
 const budgets=data.budgets.filter(b=>b.date&&b.date>=startKey&&b.date<=endKey);
 const invoices=data.invoices.filter(i=>i.date&&i.date>=startKey&&i.date<=endKey);
+const payables=data.suppliers.filter(p=>p.dueDate&&p.dueDate>=startKey&&p.dueDate<=endKey&&payableRemaining(p)>0);
 const lines=tx.length?tx.map(t=>`${fd(t.date)} | ${txLabel(t.type).padEnd(10)} | ${fm(t.amount).padStart(14)} | ${t.desc}${t.client?' — '+t.client:''}`).join('\n'):'Nenhum lançamento nesta semana.';
 const weeklyText=`RELATÓRIO SEMANAL — ${fd(startKey)} A ${fd(endKey)}
 ═══════════════════════════════════════════════════
@@ -688,6 +910,8 @@ MOVIMENTO OPERACIONAL
 ───────────────────────────────────────────────────
 Orçamentos cadastrados: ${budgets.length}
 Notas fiscais:          ${invoices.length}
+Contas a pagar:         ${payables.length}
+Falta pagar na semana:  ${fm(payables.reduce((s,p)=>s+payableRemaining(p),0))}
 Eventos/agenda:         ${events.length}
 
 ${events.length?'EVENTOS DA SEMANA\n───────────────────────────────────────────────────\n'+events.map(e=>`${fd(e.date)} ${e.time||''} — ${e.title}`).join('\n')+'\n\n':''}═══════════════════════════════════════════════════
@@ -768,10 +992,26 @@ if(!desc||!amount){alert('Preencha descrição e valor');return}
 if(eid){const t=data.transactions.find(x=>x.id===eid);Object.assign(t,{type,amount,desc,cat,date,client})}
 else data.transactions.push({id:uid(),type,amount,desc,cat,date,client});
 }else if(etype==='bg'){
-const client=document.getElementById('bg-client').value,amount=parseFloat(document.getElementById('bg-amount').value)||0,desc=document.getElementById('bg-desc').value.trim(),items=document.getElementById('bg-items').value.trim(),status=document.getElementById('bg-status').value,date=document.getElementById('bg-date').value;
-if(!client||!amount||!desc){alert('Preencha cliente, valor e descrição');return}
-if(eid){const b=data.budgets.find(x=>x.id===eid);Object.assign(b,{client,amount,desc,items,status,date})}
-else data.budgets.push({id:uid(),client,amount,desc,items,status,date});
+const number=document.getElementById('bg-number').value.trim();
+const client=document.getElementById('bg-client').value;
+const subtotal=parseFloat(document.getElementById('bg-subtotal').value)||0;
+const expenses=parseFloat(document.getElementById('bg-expenses').value)||0;
+const discount=parseFloat(document.getElementById('bg-discount').value)||0;
+const amount=Math.max(subtotal+expenses-discount,0);
+const desc=document.getElementById('bg-desc').value.trim();
+const items=document.getElementById('bg-items').value.trim();
+const status=document.getElementById('bg-status').value;
+const date=document.getElementById('bg-date').value;
+const dueDate=document.getElementById('bg-due').value;
+const paymentTerms=document.getElementById('bg-payment').value.trim();
+const warranty=document.getElementById('bg-warranty').value.trim();
+const contact=document.getElementById('bg-contact').value.trim();
+const notes=document.getElementById('bg-notes').value.trim();
+if(!client||subtotal<=0||!desc){alert('Preencha cliente, descrição e valor dos serviços');return}
+if(discount>subtotal+expenses){alert('O desconto não pode ser maior que o valor do orçamento');return}
+const payload={number,client,subtotal,expenses,discount,amount,desc,items,status,date,dueDate,paymentTerms,warranty,contact,notes};
+if(eid){const b=data.budgets.find(x=>x.id===eid);Object.assign(b,payload)}
+else data.budgets.push({id:uid(),...payload});
 }else if(etype==='inv'){
 const num=document.getElementById('inv-num').value.trim(),amount=parseFloat(document.getElementById('inv-amount').value)||0,client=document.getElementById('inv-client').value,type=document.getElementById('inv-type').value,status=document.getElementById('inv-status').value,date=document.getElementById('inv-date').value;
 if(!num||!amount||!client){alert('Preencha número, valor e cliente');return}
@@ -783,10 +1023,21 @@ if(!name){alert('Preencha o nome do cliente');return}
 if(eid){const cl=data.clients.find(x=>x.id===eid);Object.assign(cl,{name,email,phone,cnpj,address,notes})}
 else data.clients.push({id:uid(),name,email,phone,cnpj,address,notes});
 }else if(etype==='sp'){
-const name=document.getElementById('sp-name').value.trim(),email=document.getElementById('sp-email').value.trim(),phone=document.getElementById('sp-phone').value.trim(),cnpj=document.getElementById('sp-cnpj').value.trim(),category=document.getElementById('sp-cat').value.trim(),balance=parseFloat(document.getElementById('sp-balance').value)||0,notes=document.getElementById('sp-notes').value.trim();
-if(!name){alert('Preencha o nome do fornecedor');return}
-if(eid){const s=data.suppliers.find(x=>x.id===eid);Object.assign(s,{name,email,phone,cnpj,category,balance,notes})}
-else data.suppliers.push({id:uid(),name,email,phone,cnpj,category,balance,notes});
+const name=document.getElementById('sp-name').value.trim();
+const description=document.getElementById('sp-desc').value.trim();
+const category=document.getElementById('sp-cat').value;
+const totalAmount=parseFloat(document.getElementById('sp-total').value)||0;
+const paidAmount=parseFloat(document.getElementById('sp-paid').value)||0;
+const dueDate=document.getElementById('sp-due').value;
+const phone=document.getElementById('sp-phone').value.trim();
+const notes=document.getElementById('sp-notes').value.trim();
+if(!name){alert('Preencha quem deve receber ou o nome da conta');return}
+if(totalAmount<=0){alert('Informe o valor total da conta');return}
+if(paidAmount<0){alert('O valor pago não pode ser negativo');return}
+if(paidAmount>totalAmount){alert('O valor já pago não pode ser maior que o valor total');return}
+const balance=Math.max(totalAmount-paidAmount,0);
+if(eid){const s=data.suppliers.find(x=>x.id===eid);Object.assign(s,{name,description,category,totalAmount,paidAmount,dueDate,phone,notes,balance})}
+else data.suppliers.push({id:uid(),name,description,category,totalAmount,paidAmount,dueDate,phone,notes,balance});
 }else if(etype==='ev'){
 const title=document.getElementById('ev-title').value.trim(),date=document.getElementById('ev-date').value,time=document.getElementById('ev-time').value,type=document.getElementById('ev-type').value,description=document.getElementById('ev-desc').value.trim();
 if(!title||!date){alert('Preencha título e data');return}
